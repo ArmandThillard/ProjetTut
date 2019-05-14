@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'allianta';
+    src: url('./fonts/allianta_personal_use_only.ttf') format('ttf'),
+         url('./fonts/allianta_personal_use_only.otf') format('otf'),
+         url('./fonts/allianta_personal_use_only-webfont.woff2') format('woff2'),
+         url('./fonts/allianta_personal_use_only-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{background-color: #444444;}
+header{height: 20vh; background-image: url("../img/ImageAccueil.jpg"); background-size: cover; background-position: center;}
+
+#imgAccueil{height:20%;}
+
+/* Logo */
+div.logo{font-family:'allianta'; font-size: 40px; float:left; margin-left: 10px; width = 20%}
+.logo > a{text-decoration: none; color: white;}
+
+.loginDiv{background-color: #444444}
+.loginDiv >a{text-decoration: none;color: white;}
+.loginDiv{float:right; text-align:right; width:20%; display: inline-block;}
+
+div.connectDiv{display:none;}
+nav>ul{list-style-type: none; text-align:center}
+nav>ul>li>a{text-decoration:none; color:white; width: 100%; height: 100%; float:center; font-weight:bold;}
+#loginButton{display:inline-block;}
+#loginButton >label{color: white;font-weight:bold; margin-bottom: 2em;  vertical-align: middle;}
+#loginButton >button{background-color: #444444}
