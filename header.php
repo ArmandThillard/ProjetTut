@@ -31,8 +31,8 @@
                 <?php
                     if (!isset($_SESSION['login']) AND !isset($_COOKIE['login'])){
                 ?>
-                <li><a class="text-primary" href="./register.php">Sign Up</a></li>
-                <li><a href="./login.php"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                <li><a class="text-primary" href="/register.php">Sign Up</a></li>
+                <li><a href="/login.php"><span class="glyphicon glyphicon-user"></span> Login</a></li>
                 <?php
                     }else{
                 ?>
