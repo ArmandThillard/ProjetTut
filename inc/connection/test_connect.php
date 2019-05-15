@@ -1,5 +1,5 @@
 <?php
-    include('./connect_info.php');
+    require_once('./connect_info.php');
     session_start();
     try {
 	       $link = new PDO("mysql:host=$server;dbname=$db",$login, $mdp);
@@ -67,5 +67,5 @@
         }
     }
 
-    header('Location:../..');
+    header('Location:/');
 ?>

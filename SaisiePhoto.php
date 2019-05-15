@@ -1,16 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org.TR.html4/loose.dtd">
 <html>
-<head>
-	<meta charset="utf-8" />
-      <title>Horizon</title>
-	  <script src="./inc/js/functions.js" type="text/javascript"></script>
-      	<link rel="stylesheet" href="./css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="./style/style.css"
-      	<link rel="shortcut icon" type="image/x-icon" href="./Tank.ico" />
-
-</head>
 <?php
-	include("./inc/HTMLInserts/header.php");
+	require("./header.php");
 ?>
 <body>
 	<h1>Saisie</h1>
@@ -38,7 +29,7 @@
 
 			$res = $link->prepare('SELECT id_collection, nom_collection FROM collection WHERE mail_photographe = :mail');
 
-			$res->execute(array('mail' => $_COOKIE['login']));
+			$res->execute(array('mail' => $_SESSION['login']));
 			if($res->rowCount() != 0){
 				echo '<label>Collections </label> ';
 				echo "<select name='nom_collection'>";
@@ -55,4 +46,7 @@
 		<button type=reset name="reset">Reset</>
 	</form>
 </body>
+<?php
+	require("./footer.php");
+?>
 </html>
