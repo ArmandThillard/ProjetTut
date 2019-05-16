@@ -1,8 +1,11 @@
-function showConnectDiv(){
-    var div = document.getElementsByClassName("connectDiv")[0];
-    if(div.style.display == "none"){
-        div.style.display = "block";
-    }else{
-        div.style.display = "none";
-    }
+function addField() {
+    /*var test = document.getElementById("test");
+    var div = document.createElement("div");
+    var input = document.createElement("input");*/
+
+    document.getElementById("onsenfout").style.display = "inline-block";
+    /*
+    input.setAttribute('type', 'text');
+    div.appendChild(input);
+    test.innerHTML +=input ;*/
 }
