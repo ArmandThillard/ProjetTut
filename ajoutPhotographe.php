@@ -29,18 +29,18 @@
 						$_POST['numSiret'], $_POST['nomPhotographe'],
 					 	$_POST['prenomPhotographe'], $_POST['telPhotographe'], $_POST['iban'],
 						$_POST['adresseEntreprise'], $_POST['cpEntreprise'], $_POST['villeEntreprise']));
-
-        //vérifier si le photographe a été ajouté
-    	$res = $link->prepare('SELECT * FROM photoraphe WHERE mail_photographe = ? and num_siret = ?');
-
-    	$res->execute(array($_POST['adresseMail'], $_POST['numSiret']));
-
-        if ($res->fetch() == NULL) {
-            echo 'Echec ajout photographe';
-        } else {
-            echo 'Compte créé';
-        }
     }
+
+	//vérifier si le photographe a été ajouté
+	$res = $link->prepare('SELECT * FROM photoraphe WHERE mail_photographe = ? and num_siret = ?');
+
+	$res->execute(array($_POST['adresseMail'], $_POST['numSiret']));
+
+	if ($res->fetch() == NULL) {
+		echo 'Echec ajout photographe';
+	} else {
+		echo 'Compte créé';
+	}
 
 
 
