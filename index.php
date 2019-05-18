@@ -1,8 +1,10 @@
 <html>
-<?php
-    require("./header.php");
-    require("./search.php");
-?>
+<div class="position-sticky">
+    <?php
+        require("./header.php");
+        require("./search.php");
+    ?>
+</div>
 <body>
 
 </body>
