@@ -1,6 +1,7 @@
 <html>
 <?php
     require("./header.php");
+    require("./search.php");
 ?>
 <body>
 
