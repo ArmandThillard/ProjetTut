@@ -1,10 +1,12 @@
 <?php
     require("./header.php");
  ?>
-<div class="container block text-center">
+<link type="text/css" href="./style/main.css">
+
+<div id="loginContainer" class="container d-block text-center">
     <div class="well">
         <div class="block-header grey">
-			<span class="block-title">Connexion</span>
+			<h1 class="block-title">Connexion</h1>
 		</div>
         <form class="form-horizontal" action="./inc/connection/test_connect.php" method="post">
             <div class="form-group">

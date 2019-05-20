@@ -2,16 +2,14 @@
 <header>
 
     <!-- Call for Bootstrap, JQuery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./style/searchbar.css">
 
     <?php
         session_start();
         // Set session values from cookies if there are any
         if(isset($_COOKIE['login'])){
-            $_SESSION['user'] = $_COOKIE["user"];
+            $_SESSION['user'] = $_COOKIE['user'];
             $_SESSION['login'] = $_COOKIE['login'];
             $_SESSION['password'] = $_COOKIE['password'];
             if($_SESSION['user'] == 'A'){
@@ -23,35 +21,31 @@
         }
     ?>
     <!-- Navbar -->
-    <div class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/"> New Horizon </a>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark container-fluid fixed-top">
+        <a class="navbar-brand" href="/"> New Horizon </a>
+        <ul class="navbar-nav ml-auto">
+            <?php
+                if (!isset($_SESSION['login']) AND !isset($_COOKIE['login'])){
+            ?>
+            <li class="nav-item"><a class="nav-link" href="/register.php">Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="/login.php"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+            <?php
+                }else{
+            ?>
+            <li class="nav-item"><a class="nav-link" href="/monCompte.php"><span class="glyphicon glyphicon-user"></span>
                 <?php
-                    if (!isset($_SESSION['login']) AND !isset($_COOKIE['login'])){
-                ?>
-                <li><a class="text-primary" href="/register.php">Sign Up</a></li>
-                <li><a href="/login.php"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-                <?php
+                    if($_SESSION['user'] == 'A'){
+                        echo $_SESSION['admin'];
                     }else{
+                        echo $_SESSION['firstName']." ".$_SESSION['lastName'];
+                    }
                 ?>
-                <li><a href="/monCompte.php"><span class="glyphicon glyphicon-user"></span>
-                    <?php
-                        if($_SESSION['user'] == 'A'){
-                            echo $_SESSION['admin'];
-                        }else{
-                            echo $_SESSION['firstName']." ".$_SESSION['lastName'];
-                        }
-                    ?>
-                </a></li>
-                <button class="btn btn-danger navbar-btn" onClick="window.location='./inc/connection/disconnect.php';">Se déconnecter</button>
-                    <?php
-                        }
-                    ?>
+            </a></li>
+            <button class="btn btn-danger navbar-btn" onClick="window.location='./inc/connection/disconnect.php';">Se déconnecter</button>
+                <?php
+                    }
+                ?>
 
-            </ul>
-        </div>
-    </div>
+        </ul>
+    </nav>
 </header>
