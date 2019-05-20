@@ -61,8 +61,8 @@
 			}
 
 			$res = $link->prepare('SELECT id_collection, nom_collection FROM collection WHERE mail_photographe = :mail');
-
 			$res->execute(array('mail' => $_SESSION['login']));
+
 			if($res->rowCount() != 0){
 				echo '<label>Collections </label> ';
 				echo "<select name='nomCollection'>";
@@ -72,6 +72,7 @@
 				echo "	</select>";
 			} else {
 				echo 'Collections : Aucune collection';
+				echo "<input type=text name=nomCollection style='display:none;'></input>";
 			}
 		?>
 		<input id="saisieNvCol" style="display:none;"></input>
