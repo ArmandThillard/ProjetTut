@@ -1,11 +1,7 @@
-function addField() {
-    /*var test = document.getElementById("test");
-    var div = document.createElement("div");
-    var input = document.createElement("input");*/
+function addFieldCat() {
+    document.getElementById("saisieNvCat").style.display = "inline-block";
+}
 
-    document.getElementById("onsenfout").style.display = "inline-block";
-    /*
-    input.setAttribute('type', 'text');
-    div.appendChild(input);
-    test.innerHTML +=input ;*/
+function addFieldCol() {
+    document.getElementById("saisieNvCol").style.display = "inline-block";
 }

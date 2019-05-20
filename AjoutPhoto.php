@@ -9,6 +9,9 @@
 	//récupérer date du jour pour date d'import
 	$dateImport = date("y-m-d H:i:s", time());
 
+	//récupérer les mots-clés
+	$motsCles = explode(',', $_POST['tag']);
+
 	//récupérer id_collection à partir du nom_collection de la liste déroulante
 	$collection = $link->prepare('SELECT id_collection FROM collection WHERE mail_photographe = :mail and nom_collection = :collection');
 

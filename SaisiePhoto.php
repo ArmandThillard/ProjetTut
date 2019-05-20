@@ -19,7 +19,38 @@
 		<br />
 		<label>Prix H.T. </label> <input name='prix_ht_image' type=text />
 		<br />
+		<label>Catégorie </label> <input name='catégorie' type=text />
+		<br />
+		<label>Mots-clés </label> <input name='tag' type=text />
+		<br />
 
+
+		<?php
+			include('./inc/connection/connect_info.php');
+			try {
+				$link = new PDO("mysql:host=$server;dbname=$db",$login, $mdp);
+			} catch(Exception $e) {
+				die('Erreur : '.$e->getMessage());
+			}
+
+			$res = $link->prepare('SELECT id_categorie, nom_categorie FROM categorie');
+
+			$res->execute(array());
+
+			if($res->rowCount() != 0){
+				echo '<label>Categories </label> ';
+				echo "<select name='nomCategorie'>";
+				while($data = $res->fetch()){
+					echo "<option>".$data['nom_categorie'];
+				}
+				echo "	</select>";
+			} else {
+				echo 'Catégories : Aucune catégorie';
+			}
+		?>
+		<input id="saisieNvCat" style="display:none;"></input>
+		<button type="button" name="nouvelleCategorie" onclick="addFieldCat()">+</button>
+		</br>
 
 		<?php
 			include('./inc/connection/connect_info.php');
@@ -43,9 +74,8 @@
 				echo 'Collections : Aucune collection';
 			}
 		?>
-		<input id="onsenfout" style="display:none;"></input>
-		<button type="submit" name="addCollection"
-		<button type="button" name="nouvelleCollection" onclick="addField()">+</button>
+		<input id="saisieNvCol" style="display:none;"></input>
+		<button type="button" name="nouvelleCollection" onclick="addFieldCol()">+</button>
 		</br>
 		<script src="./inc/js/functions.js"></script>
 		<button type=submit name="submit">Envoyer</>
