@@ -22,3 +22,7 @@ body {
 .navbar{
     margin-bottom:auto;
 }
+
+.carousel-caption h3 span{
+    /*background-color: #343a40;*/
+}

@@ -9,8 +9,8 @@
 
 <!-- Carousel Catégories -->
 <link rel="stylesheet" type="text/css" href="./style/carousel.css">
-<div id="carousel-container" class="container d-block h-20">
-    <div id="carousel-categories" class="carousel slide" data-ride="carousel">
+<div id="carousel-container" class="d-block">
+    <div id="carousel-categories" class="carousel slide mx-auto" data-ride="carousel">
         <ul class="carousel-indicators">
             <li data-target="#carousel-categories" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-categories" data-slide-to="1"></li>
@@ -18,21 +18,47 @@
         </ul>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block" src="./img/categories/cat-animaux.jpg" alt="catégorie animaux">
-                <div class="carousel-caption">
-                    <h3>Animaux</h3>
+                <div class="row">
+                    <div class="col">
+                        <img class="img-fluid" src="./img/categories/cat-animaux.jpg" alt="catégorie animaux">
+                        <div class="carousel-caption">
+                            <h3><span>Animaux</span></h3>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img class="img-fluid" src="./img/categories/cat-nature.jpg" alt="catégorie nature">
+                        <div class="carousel-caption">
+                            <h3><span>Nature</span></h3>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img class="img-fluid" src="./img/categories/cat-sport.jpg" alt="catégorie sport">
+                        <div class="carousel-caption">
+                            <h3><span>Sport</span></h3>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block" src="./img/categories/cat-nature.jpg" alt="catégorie nature">
-                <div class="carousel-caption">
-                    <h3>Nature</h3>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block" src="./img/categories/cat-sport.jpg" alt="catégorie sport">
-                <div class="carousel-caption">
-                    <h3>Sport</h3>
+                <div class="row">
+                    <div class="col">
+                        <img class="img-fluid" src="./img/categories/cat-mariage.jpg" alt="catégorie mariage">
+                        <div class="carousel-caption">
+                            <h3><span>Mariage</span></h3>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img class="img-fluid" src="./img/categories/cat-musique.jpg" alt="catégorie musique">
+                        <div class="carousel-caption">
+                            <h3><span>Musique</span></h3>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img class="img-fluid" src="./img/categories/cat-technologie.jpg" alt="catégorie technologie">
+                        <div class="carousel-caption">
+                            <h3><span>Technologie</span></h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@
         }
     ?>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark container-fluid fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top sticky-top">
         <a class="navbar-brand" href="/"> New Horizon </a>
         <ul class="navbar-nav ml-auto">
             <?php

@@ -22,7 +22,7 @@
 
 
     if($res->fetch() == NULL) {
-        //ajouter du photographe
+        //ajout du photographe
 		$insert = $link->prepare('INSERT INTO photographe(mail_photographe, nom_entreprise, num_siret, nom_photographe, prenom_photographe,
 			 									tel_photographe, IBAN_photographe, adresse_photographe, CP_photographe, ville_photographe, mdp_photographe)
 												VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
