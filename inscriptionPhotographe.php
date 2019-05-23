@@ -10,37 +10,94 @@
             <label>Civilité </label> <input name='homme' type='radio'> M. </input>
                                      <input name='femme' type='radio'> Mme </input>
                                      <input name='autre' type='radio'> Autre </input>
-            <br />
-            <label>Prénom </label> <input name='prenomPhotographe' type=text />
-            <br />
-            <label>Nom </label> <input name='nomPhotographe' type=text />
-            <br />
-            <label>Adresse mail </label> <input name='adresseMail' type=text />
-            <br />
-            <label>Mot de passe </label> <input  type="password" name="password">
-            <br />
-            <label>Confirmer mot de passe </label> <input  type="password" name="confPassword">
-            <br />
-            <label>Téléphone </label> <input name='telPhotographe' type=text />
-            <br />
+            <div class="form-group">
+                <label for="nom"> Nom </label>
+                <div class="input-group">
+                    <input type="text" name="nomPhotographe">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prenom"> Prénom </label>
+                <div class="input-group">
+                    <input type="text" name="prenomPhotographe">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="mail"> Adresse email </label>
+                <div class="input-group">
+                    <input type="text" name="adresseMail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password"> Mot de passe </label>
+                <div class="input-group">
+                    <input type="password" name="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password2"> Confirmation </label>
+                <div class="input-group">
+                    <input type="password" name="confPassword">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="telPhotographe"> Téléphone </label>
+                <div class="input-group">
+                    <input type="text" name="telPhotographe">
+                </div>
+            </div>
         </div>
 
         <div name="infosEntreprise">
-            <h2>Informations personnelles</h2>
-            <label>Nom </label> <input name='nomEntreprise' type=text />
-            <br />
-            <label>N° de SIRET </label> <input name='numSiret' type=text />
-            <br />
-            <label>RIB </label> <input  type="text" name="rib">
-            <br />
-            <label>IBAN </label> <input  type="text" name="iban">
-            <br />
-            <label>Adresse </label> <input  type="text" name="adresseEntreprise">
-            <br />
-            <label>CP </label> <input  type="text" name="cpEntreprise"> <label>Ville </label> <input  type="text" name="villeEntreprise">
-            <br />
-            <label>Téléphone </label> <input name='telPhotographe' type=text />
-            <br />
+            <h2>Informations Entreprise</h2>
+            <div class="form-group">
+                <label for="nomEntreprise"> Nom de l'entreprise </label>
+                <div class="input-group">
+                    <input type="text" name="nomEntreprise">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="numSiret"> N° de SIRET </label>
+                <div class="input-group">
+                    <input type="text" name="numSiret">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="rib"> RIB </label>
+                <div class="input-group">
+                    <input type="text" name="rib">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="iban"> IBAN </label>
+                <div class="input-group">
+                    <input type="text" name="iban">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="adresseEntreprise"> Adresse </label>
+                <div class="input-group">
+                    <input type="text" name="adresseEntreprise">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cpEntreprise"> Code Postal </label>
+                <div class="input-group">
+                    <input type="text" name="cpEntreprise">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="villeEntreprise"> Ville </label>
+                <div class="input-group">
+                    <input type="text" name="villeEntreprise">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="telPhotographe"> Téléphone </label>
+                <div class="input-group">
+                    <input type="text" name="telPhotographe">
+                </div>
+            </div>
         </div>
         <button type=submit name="submit">Envoyer</>
         <button type=reset name="reset">Reset</>
