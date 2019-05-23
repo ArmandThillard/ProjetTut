@@ -21,7 +21,7 @@
 		$insert->execute(array($_POST['mail'], $_POST['nom'], $_POST['prenom'], $_POST['password'], $_POST['telClient']));
 
 		//vérifier si le photographe a été ajouté
-		echo $_POST['adresseMail'].'</br>';
+		echo $_POST['mail'].'</br>';
 
 		$res = $link->prepare('SELECT * FROM client WHERE mail_client = ?');
 

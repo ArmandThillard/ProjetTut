@@ -41,6 +41,8 @@
                   <input type="text" name="telClient">
               </div>
           </div>
+          <button type=submit name="submit">Envoyer</>
+          <button type=reset name="reset">Reset</>
       </form>
 </body>
 
