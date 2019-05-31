@@ -1,0 +1,141 @@
+/************************ Ajout des tags *************************/
+
+INSERT INTO `tag`(`nom_tag`) VALUES ("basket");
+INSERT INTO `tag`(`nom_tag`) VALUES ("chien");
+INSERT INTO `tag`(`nom_tag`) VALUES ("chat");
+INSERT INTO `tag`(`nom_tag`) VALUES ("rugby");
+INSERT INTO `tag`(`nom_tag`) VALUES ("montagne");
+INSERT INTO `tag`(`nom_tag`) VALUES ("foret");
+INSERT INTO `tag`(`nom_tag`) VALUES ("mariage");
+INSERT INTO `tag`(`nom_tag`) VALUES ("technologie");
+INSERT INTO `tag`(`nom_tag`) VALUES ("concert");
+
+/********************** Ajout des categories *********************/
+
+INSERT INTO `categorie`(`nom_categorie`) VALUES ("sport");
+
+INSERT INTO `categorie`(`nom_categorie`) VALUES ("technologies");
+
+INSERT INTO `categorie`(`nom_categorie`) VALUES ("animaux");
+
+INSERT INTO `categorie`(`nom_categorie`) VALUES ("nautre");
+
+INSERT INTO `categorie`(`nom_categorie`) VALUES ("mariage");
+
+INSERT INTO `categorie`(`nom_categorie`) VALUES ("musique");
+
+
+/*********************** Ajout des photos *********************/
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("chat","2019-05-31","le chat 1",3.0,1,null,null,"hugo@gmail.com","/img/chat1.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("chat2","2019-05-31","le chat 2",3.0,1,null,null,"hugo@gmail.com","/img/chat2.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("chien1","2019-05-31","le chien 1",3.0,1,null,null,"hugo@gmail.com","/img/chien1.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("chien2","2019-05-31","le chien 2",3.0,1,null,null,"hugo@gmail.com","/img/chien2.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("concert1","2019-05-31","le concert 1",3.0,1,null,null,"hugo@gmail.com","/img/concert1.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("concert2","2019-05-31","le concert 2",3.0,1,null,null,"hugo@gmail.com","/img/concert2.png");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("foret1","2019-05-31","la foret 1",3.0,1,null,null,"hugo@gmail.com","/img/foret1.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("foret2","2019-05-31","la foret 2",3.0,1,null,null,"hugo@gmail.com","/img/foret2.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("mariage1","2019-05-31","le mariage 1",3.0,1,null,null,"hugo@gmail.com","/img/mariage1.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("mariage2","2019-05-31","le mariage 2",3.0,1,null,null,"hugo@gmail.com","/img/mariage2.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("montagne1","2019-05-31","la montagne 1",3.0,1,null,null,"hugo@gmail.com","/img/montagne1.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("montagne2","2019-05-31","la montagne 2",3.0,1,null,null,"hugo@gmail.com","/img/montagne2.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("rugby1","2019-05-31","le rugby 1",3.0,1,null,null,"hugo@gmail.com","/img/rugby1.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("rugby2","2019-05-31","le rugby 2",3.0,1,null,null,"hugo@gmail.com","/img/rugby2.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("techno1","2019-05-31","la techno 1",3.0,1,null,null,"hugo@gmail.com","/img/techno1.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("techno2","2019-05-31","la techno 2",3.0,1,null,null,"hugo@gmail.com","/img/techno2.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("basket1","2019-05-31","le basket 1",3.0,1,null,null,"hugo@gmail.com","/img/basket1.jpg");
+
+INSERT INTO `image`(`nom_image`, `date_upload_image`, `desc_image`, `prix_ht_image`, `image_visible`, `code_acces_image`, `id_collection`, `mail_photographe`, `lien_image`) VALUES ("basket2","2019-05-31","le basket 2",3.0,1,null,null,"hugo@gmail.com","/img/basket2.jpg");
+
+
+/******************* Lien tag/img *********************/
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "chat"),(SELECT id_image from image where nom_image like "chat1"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "chat"),(SELECT id_image from image where nom_image like "chat2"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "chien"),(SELECT id_image from image where nom_image like "chien1"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "chien"),(SELECT id_image from image where nom_image like "chien2"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "basketball"),(SELECT id_image from image where nom_image like "basket1"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "basketball"),(SELECT id_image from image where nom_image like "basket2"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "rugby"),(SELECT id_image from image where nom_image like "rugby1"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "rugby"),(SELECT id_image from image where nom_image like "rugby2"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "montagne"),(SELECT id_image from image where nom_image like "montagne1"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "montagne"),(SELECT id_image from image where nom_image like "montagne2"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "foret"),(SELECT id_image from image where nom_image like "foret1"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "foret"),(SELECT id_image from image where nom_image like "foret2"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "concert"),(SELECT id_image from image where nom_image like "concert1"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "concert"),(SELECT id_image from image where nom_image like "concert2"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "technologie"),(SELECT id_image from image where nom_image like "techno1"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "technologie"),(SELECT id_image from image where nom_image like "techno2"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "mariage"),(SELECT id_image from image where nom_image like "mariage1"));
+
+INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag where nom_tag = "mariage"),(SELECT id_image from image where nom_image like "mariage2"));
+
+/************ lien categorie/img ****************/
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image like "chat1"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image like "chat2"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image like "chien1"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image like "chien2"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image like "basket1"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image like "basket2"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image like "rugby1"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image like "rugby2"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image like "montagne1"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image like "montagne2"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image like "foret1"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image like "foret2"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "musique"),(SELECT id_image from image where nom_image like "concert1"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "musique"),(SELECT id_image from image where nom_image like "concert2"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "technologie"),(SELECT id_image from image where nom_image like "techno1"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "technologie"),(SELECT id_image from image where nom_image like "techno2"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "mariage"),(SELECT id_image from image where nom_image like "mariage1"));
+
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "mariage"),(SELECT id_image from image where nom_image like "mariage2"));
