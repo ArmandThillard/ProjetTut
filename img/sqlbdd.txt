@@ -18,7 +18,7 @@ INSERT INTO `categorie`(`nom_categorie`) VALUES ("technologies");
 
 INSERT INTO `categorie`(`nom_categorie`) VALUES ("animaux");
 
-INSERT INTO `categorie`(`nom_categorie`) VALUES ("nautre");
+INSERT INTO `categorie`(`nom_categorie`) VALUES ("nature");
 
 INSERT INTO `categorie`(`nom_categorie`) VALUES ("mariage");
 
@@ -104,38 +104,38 @@ INSERT INTO `referencer`(`id_tag`, `id_image`) VALUES ((SELECT id_tag FROM tag w
 
 /************ lien categorie/img ****************/
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image like "chat1"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image = "chat1"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image like "chat2"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image = "chat2"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image like "chien1"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image = "chien1"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image like "chien2"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "animaux"),(SELECT id_image from image where nom_image = "chien2"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image like "basket1"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image = "basket1"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image like "basket2"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image = "basket2"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image like "rugby1"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image = "rugby1"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image like "rugby2"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "sport"),(SELECT id_image from image where nom_image = "rugby2"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image like "montagne1"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image = "montagne1"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image like "montagne2"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image = "montagne2"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image like "foret1"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image = "foret1"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image like "foret2"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "nature"),(SELECT id_image from image where nom_image = "foret2"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "musique"),(SELECT id_image from image where nom_image like "concert1"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "musique"),(SELECT id_image from image where nom_image = "concert1"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "musique"),(SELECT id_image from image where nom_image like "concert2"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "musique"),(SELECT id_image from image where nom_image = "concert2"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "technologie"),(SELECT id_image from image where nom_image like "techno1"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "technologie"),(SELECT id_image from image where nom_image = "techno1"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "technologie"),(SELECT id_image from image where nom_image like "techno2"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "technologie"),(SELECT id_image from image where nom_image = "techno2"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "mariage"),(SELECT id_image from image where nom_image like "mariage1"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "mariage"),(SELECT id_image from image where nom_image = "mariage1"));
 
-INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "mariage"),(SELECT id_image from image where nom_image like "mariage2"));
+INSERT INTO `correspondre`(`id_categorie`, `id_image`) VALUES ((SELECT id_categorie FROM categorie where nom_categorie = "mariage"),(SELECT id_image from image where nom_image = "mariage2"));
