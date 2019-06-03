@@ -9,8 +9,9 @@
     }
 ?>
 <div class="container-fluid">
+    <div class="header"></div>
     <div class="row">
-        <div id="filters" class="col-2">
+        <div id="filters" class="col-3">
             <div id="prix">
                 <label>Min</label><input name="prix-min" type="number"> - <label>Max</label><input name="prix-max" type="number">
             </div>
@@ -24,13 +25,13 @@
                 ?>
             </div>
         </div>
-        <div id="searchedImages" class="col-10">
+        <div id="searchedImages" class="col-9">
             <?php
                 if(!isset($_GET['search'])){
                     $_GET['search'] = '';
                 }
                 $search = explode(' ',$_GET['search']);
-                $requete = 'SELECT lien_image FROM image, tag, referencer WHERE image.id_image = referencer.id_image AND tag.id_tag = referencer.id_tag AND ';
+                $requete = 'SELECT image.id_image id, image.lien_image lien FROM image, tag, referencer WHERE image.id_image = referencer.id_image AND tag.id_tag = referencer.id_tag AND ';
                 //recherche des mots-clés dans : TAGS, NOM_IMAGE
                 $requete = $requete.'(';
                 for($i = 0; $i < count($search); $i++){
@@ -43,11 +44,22 @@
                 }
 
                 $res = $link->query($requete);
+                $nbImages = 0;
+                echo '<div class="row">';
+                while($data = $res->fetch()){
 
-                    while($data = $res->fetch()){
-                        echo '<img class="img-fluid" src="'.$data['lien_image'].'">';
+                    if($nbImages % 3 == 0){
+                        echo '</div><div class="row">';
                     }
-            ?>
+                    ?>
+                        <div class="col-4 gallery-image">
+                            <?php
+                            echo '<a href="./photo.php?id='.$data['id'].'"><img class="img-fluid" src="'.$data['lien'].'"></a>';
+                            $nbImages++;
+                            ?>
+                        </div>
+            <?php } ?>
+            </div>
         </div>
     </div>
 </div>

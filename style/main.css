@@ -26,3 +26,8 @@ body {
 .carousel-caption h3 span{
     /*background-color: #343a40;*/
 }
+
+.img-fluid{
+    width : 300px;
+    object-fit:cover;
+}
