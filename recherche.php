@@ -26,9 +26,12 @@
         </div>
         <div id="searchedImages" class="col-10">
             <?php
+                if(!isset($_GET['search'])){
+                    $_GET['search'] = '';
+                }
                 $search = explode(' ',$_GET['search']);
                 $requete = 'SELECT lien_image FROM image, tag, referencer WHERE image.id_image = referencer.id_image AND tag.id_tag = referencer.id_tag AND ';
-                //recherche des mots-clés
+                //recherche des mots-clés dans : TAGS, NOM_IMAGE
                 $requete = $requete.'(';
                 for($i = 0; $i < count($search); $i++){
                     $requete = $requete."(tag.nom_tag LIKE '%".$search[$i]."%' OR image.nom_image LIKE '%".$search[$i]."%')";
@@ -38,14 +41,12 @@
                         $requete = $requete.")";
                     }
                 }
-                echo $requete;
 
                 $res = $link->query($requete);
-                if($res->fetch() != NULL){
+
                     while($data = $res->fetch()){
                         echo '<img class="img-fluid" src="'.$data['lien_image'].'">';
                     }
-                }
             ?>
         </div>
     </div>
