@@ -28,6 +28,5 @@ body {
 }
 
 .img-fluid{
-    width : 300px;
     object-fit:cover;
 }
