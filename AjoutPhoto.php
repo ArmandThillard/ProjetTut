@@ -6,6 +6,9 @@
 		die('Erreur : '.$e->getMessage());
 	}
 
+	//
+	echo $_POST['img'].'ok';
+
 	//récupérer date du jour pour date d'import
 	$dateImport = date("y-m-d H:i:s", time());
 
