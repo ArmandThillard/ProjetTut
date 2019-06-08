@@ -1,51 +1,57 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org.TR.html4/loose.dtd">
 <html>
+<head>
+	<meta charset="utf-8" />
+      <title>Inscription</title>
+</head>
 <?php
     require('./header.php');
 ?>
-<h1>Inscription Client</h1>
-      <form method="post" action="./ajoutClient.php">
-          <div class="form-group">
-              <label for="nom"> Nom </label>
-              <div class="input-group">
-                  <input type="text" name="nom">
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="prenom"> Prénom </label>
-              <div class="input-group">
-                  <input type="text" name="prenom">
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="mail"> Adresse email </label>
-              <div class="input-group">
-                  <input type="text" name="mail">
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="password"> Mot de passe </label>
-              <div class="input-group">
-                  <input type="password" name="password">
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="password2"> Confirmation </label>
-              <div class="input-group">
-                  <input type="password" name="password2">
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="telClient"> Téléphone </label>
-              <div class="input-group">
-                  <input type="text" name="telClient">
-              </div>
-          </div>
-          <button type=submit name="submit">Envoyer</>
-          <button type=reset name="reset">Reset</>
-      </form>
+<body>
+	<div class="container text-center">
+		<h1 class="mt-lg-5">Inscrivez-vous</h1></br>
+		<form  method=post action="./ajoutClient.php">
+			<div class="form-group row mt-sm-5">
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Nom</label>
+				<div class="col-sm-4 ">
+					<input name='nom' type=text class="form-control " />
+				</div>
+			</div>
+			<div class="form-group row mt-sm-4">
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Prénom</label>
+				<div class="col-sm-4">
+					<input class="form-control" name='prenom' type=text />
+				</div>
+			</div>
+            <div class="form-group row mt-sm-4">
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Adresse email</label>
+				<div class="col-sm-4">
+					<input class="form-control" name='mail' type=text />
+				</div>
+			</div>
+            <div class="form-group row mt-sm-4">
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Mot de passe</label>
+				<div class="col-sm-4">
+					<input class="form-control" name='password' type=password />
+				</div>
+			</div>
+            <div class="form-group row mt-sm-4">
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Confirmation</label>
+				<div class="col-sm-4 ">
+					<input class="form-control" name='password2' type=password />
+				</div>
+			</div>
+            <div class="form-group row mt-sm-4 mb-sm-4">
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Téléphone</label>
+				<div class="col-sm-4">
+					<input class="form-control" name='telClient' type=text />
+				</div>
+			</div>
+            <button type=reset class="btn btn-light mr-sm-5" name="reset">Annuler</button>
+			<button type=submit class="btn btn-success ml-sm-5" name="submit">Envoyer</button>
+		</form>
+	</div>
 </body>
-
 <?php
     require('./footer.php');
 ?>

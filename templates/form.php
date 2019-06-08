@@ -8,7 +8,6 @@
     require('./header.php');
 ?>
 <body>
-
 	<div class="container text-center">
 		<h1>Title</h1></br>
 		<form  method=post action="#">
