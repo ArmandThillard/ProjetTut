@@ -12,37 +12,37 @@
 		<h1 class="mt-lg-5">Inscrivez-vous</h1></br>
 		<form  method=post action="./ajoutClient.php">
 			<div class="form-group row mt-sm-5">
-				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Nom</label>
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Nom</label>
 				<div class="col-sm-4 ">
 					<input name='nom' type=text class="form-control " />
 				</div>
 			</div>
 			<div class="form-group row mt-sm-4">
-				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Prénom</label>
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Prénom</label>
 				<div class="col-sm-4">
 					<input class="form-control" name='prenom' type=text />
 				</div>
 			</div>
             <div class="form-group row mt-sm-4">
-				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Adresse email</label>
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Adresse email</label>
 				<div class="col-sm-4">
 					<input class="form-control" name='mail' type=text />
 				</div>
 			</div>
             <div class="form-group row mt-sm-4">
-				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Mot de passe</label>
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Mot de passe</label>
 				<div class="col-sm-4">
 					<input class="form-control" name='password' type=password />
 				</div>
 			</div>
             <div class="form-group row mt-sm-4">
-				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Confirmation</label>
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Confirmation</label>
 				<div class="col-sm-4 ">
 					<input class="form-control" name='password2' type=password />
 				</div>
 			</div>
             <div class="form-group row mt-sm-4 mb-sm-4">
-				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold">Téléphone</label>
+				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Téléphone</label>
 				<div class="col-sm-4">
 					<input class="form-control" name='telClient' type=text />
 				</div>
