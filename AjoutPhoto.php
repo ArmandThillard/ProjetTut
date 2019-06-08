@@ -30,7 +30,7 @@
 	//récupérer id_collection à partir du nom_collection de la liste déroulante
 	$collection = $link->prepare('SELECT id_collection FROM collection WHERE mail_photographe = :mail and nom_collection = :collection');
 
-	$collection->execute(array('mail' => $_SESSION['login'], 'collection' => $_POST['nomCollection']));
+	$collection->execute(array('mail' => $_COOKIE['login'], 'collection' => $_POST['nomCollection']));
 
 	//$tmp variable de type array contenant valeurs de $collection
 	$tmp = $collection->fetch();
@@ -55,17 +55,17 @@
 	//vérifier si l'image existe déjà
 	if ($idCollection != NULL) {
 		$res = $link->prepare('SELECT * FROM image WHERE code_acces_image = ? AND desc_image = ?
-			 										and lien_image = ? and mail_photographe = ? and nom_image = ?
+			 										and mail_photographe = ? and nom_image = ?
 													and id_collection = ? and prix_ht_image = ?');
 
-		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_SESSION['login'],
+		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $_COOKIE['login'],
 							$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 	} else {
 		$res = $link->prepare('SELECT * FROM image WHERE code_acces_image = ? AND desc_image = ?
-			 										and lien_image = ? and mail_photographe = ? and nom_image = ?
+			 										and mail_photographe = ? and nom_image = ?
 													and id_collection is ? and prix_ht_image = ?');
 
-		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_SESSION['login'],
+		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $_COOKIE['login'],
 							$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 	}
 
@@ -74,13 +74,13 @@
 	if ($res->fetch() == NULL){
 /******************************* Ajout de l'image ********************************/
 		//ajouter l'image
-		$insert = $link->prepare('INSERT INTO image(code_acces_image, date_upload_image, desc_image, image_visible, lien_image,
+		$insert = $link->prepare('INSERT INTO image(code_acces_image, date_upload_image, desc_image, image_visible,
 			 									mail_photographe, nom_image, id_collection, prix_ht_image)
-												VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+												VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 		$insert->execute(array($_POST['code_acces_image'], $dateImport,
-						$_POST['desc_image'], $img_visible,
-					 	$lienImage, $_SESSION['login'], $_POST['nom_image'],
-						$idCollection, $_POST['prix_ht_image']));
+								$_POST['desc_image'], $img_visible,
+							 	$_COOKIE['login'], $_POST['nom_image'],
+								$idCollection, $_POST['prix_ht_image']));
 
 /******************************* Fin Ajout de l'image ********************************/
 
@@ -88,17 +88,17 @@
 		//vérification ajout image
 		if ($idCollection != NULL) {
 			$res = $link->prepare('SELECT * FROM image WHERE code_acces_image = ? AND desc_image = ?
-				 										and lien_image = ? and mail_photographe = ? and nom_image = ?
+				 										and mail_photographe = ? and nom_image = ?
 														and id_collection = ? and prix_ht_image = ?');
 
-			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_SESSION['login'],
+			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $_COOKIE['login'],
 								$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 		} else {
 			$res = $link->prepare('SELECT * FROM image WHERE code_acces_image = ? AND desc_image = ?
-				 										and lien_image = ? and mail_photographe = ? and nom_image = ?
+				 										and mail_photographe = ? and nom_image = ?
 														and id_collection is ? and prix_ht_image = ?');
 
-			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_SESSION['login'],
+			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $_COOKIE['login'],
 								$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 		}
 		$dataImg = $res->fetch();
@@ -107,6 +107,45 @@
 
 
 		if ($dataImg != NULL) {
+
+/******************************* Upload de la photo *************************************/
+			$maxsize = $_POST['MAX_FILE_SIZE'];
+			$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
+			//1. strrchr renvoie l'extension avec le point (« . »).
+			//2. substr(chaine,1) ignore le premier caractère de chaine.
+			//3. strtolower met l'extension en minuscules.
+			$extension_upload = strtolower(  substr(  strrchr($_FILES['img']['name'], '.')  ,1)  );
+
+			/*$_FILES['img']['type']     //Le type du fichier. Par exemple, cela peut être « image/png ».
+			$_FILES['img']['size']     //La taille du fichier en octets.
+			$_FILES['img']['tmp_name'] //L'adresse vers le fichier uploadé dans le répertoire temporaire.
+			$_FILES['img']['error']    //Le code d'erreur, qui permet de savoir si le fichier a bien été uploadé.
+			*/
+
+			//Contrôles image
+			if ($_FILES['img']['error'] > 0) $erreur = "Erreur lors du transfert";
+			if ($_FILES['img']['size'] > $maxsize) $erreur = "Le fichier est trop gros";
+
+			if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
+
+			if ($_FILES['img']['error'] <= 0 and $_FILES['img']['size'] <= $maxsize and in_array($extension_upload,$extensions_valides)) {
+				if ($idCollection == NULL) {
+					$nomImg = $dataImg[0];
+					$chemin = "./img/".$_COOKIE['login']."/".$nomImg.".".$extension_upload;
+				    $resultat = move_uploaded_file($_FILES['img']['tmp_name'],$chemin);
+				}// besoin d'un else si image dans une collection
+			if ($resultat) echo "Transfert réussi";
+			}
+/******************************* Fin Upload de la photo *************************************/
+
+/****************************** Ajouter le lien de l'image à la bdd *******************************/
+
+			$res = $link->prepare('UPDATE image SET lien_image = ? WHERE id_image = ?');
+
+			$res->execute(array($chemin, $nomImg));
+
+
+/****************************** Fin Ajouter le lien de l'image à la bdd *******************************/
 
 /******************************* Lien categorie/img ********************************/
 			echo "dataImg : ".$dataImg[0]."</br>";
