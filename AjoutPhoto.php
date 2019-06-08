@@ -30,7 +30,7 @@
 	//récupérer id_collection à partir du nom_collection de la liste déroulante
 	$collection = $link->prepare('SELECT id_collection FROM collection WHERE mail_photographe = :mail and nom_collection = :collection');
 
-	$collection->execute(array('mail' => $_COOKIE['login'], 'collection' => $_POST['nomCollection']));
+	$collection->execute(array('mail' => $_SESSION['login'], 'collection' => $_POST['nomCollection']));
 
 	//$tmp variable de type array contenant valeurs de $collection
 	$tmp = $collection->fetch();
@@ -58,14 +58,14 @@
 			 										and lien_image = ? and mail_photographe = ? and nom_image = ?
 													and id_collection = ? and prix_ht_image = ?');
 
-		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_COOKIE['login'],
+		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_SESSION['login'],
 							$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 	} else {
 		$res = $link->prepare('SELECT * FROM image WHERE code_acces_image = ? AND desc_image = ?
 			 										and lien_image = ? and mail_photographe = ? and nom_image = ?
 													and id_collection is ? and prix_ht_image = ?');
 
-		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_COOKIE['login'],
+		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_SESSION['login'],
 							$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 	}
 
@@ -79,7 +79,7 @@
 												VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
 		$insert->execute(array($_POST['code_acces_image'], $dateImport,
 						$_POST['desc_image'], $img_visible,
-					 	$lienImage, $_COOKIE['login'], $_POST['nom_image'],
+					 	$lienImage, $_SESSION['login'], $_POST['nom_image'],
 						$idCollection, $_POST['prix_ht_image']));
 
 /******************************* Fin Ajout de l'image ********************************/
@@ -91,14 +91,14 @@
 				 										and lien_image = ? and mail_photographe = ? and nom_image = ?
 														and id_collection = ? and prix_ht_image = ?');
 
-			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_COOKIE['login'],
+			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_SESSION['login'],
 								$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 		} else {
 			$res = $link->prepare('SELECT * FROM image WHERE code_acces_image = ? AND desc_image = ?
 				 										and lien_image = ? and mail_photographe = ? and nom_image = ?
 														and id_collection is ? and prix_ht_image = ?');
 
-			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_COOKIE['login'],
+			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $lienImage, $_SESSION['login'],
 								$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 		}
 		$dataImg = $res->fetch();
