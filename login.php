@@ -3,7 +3,7 @@
  ?>
 <link type="text/css" href="./style/main.css">
 
-<div id="loginContainer" class="container d-block text-center " style="justify-content : center">
+<div id="loginContainer" class="container d-block text-center ">
         <div class="block-header grey">
 			<h1 class="block-title">Connexion</h1>
 		</div>
