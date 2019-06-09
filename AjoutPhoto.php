@@ -11,9 +11,6 @@
 	//récupérer date du jour pour date d'import
 	$dateImport = date("y-m-d H:i:s", time());
 
-	//récupérer le lien de l'image à partir de l'upload
-	$lienImage = 'on verra plus tard';
-
 	//récupérer les mots-clés
 	$motsCles = explode(', ', $_POST['tag']);
 	echo "Tags POST : ".$_POST['tag']."</br>";
@@ -35,7 +32,7 @@
 	//$tmp variable de type array contenant valeurs de $collection
 	$tmp = $collection->fetch();
 	$idCollection = $tmp[0];
-	echo "id collection : ".$idCollection."</br>";
+
 
 	//Image privée?
 	if(isset($_POST['image_visible'])) {
@@ -46,7 +43,48 @@
 	echo "img visible : ".$img_visible."</br>";
 	echo "mdp = ".$_POST['code_acces_image']."</br>";
 
+	//nouvelle collection
+	if (isset($_POST['nvCol'])) {
 
+		//collection focée visible
+		$colVisible = 1;
+		$codeAccesCol = null;
+
+		//vérifier si la collection existe
+		$res = $link->prepare('SELECT * FROM collection WHERE mail_photographe = ? and nom_collection = ?');
+
+		$res->execute(array($_COOKIE['login'], $_POST['nvCol']));
+
+		$tmpExist = $res->fetch();
+		echo 'tmpexiste :'.gettype($tmpExist).'</br>';
+		echo 'val tmpexiste :'.$tmpExist.'</br>';
+
+		if($tmpExist == NULL) {
+
+			//création du dossier collection
+			$nomChemin = "./img/".$_COOKIE['login']."/".$_POST['nvCol'];
+			mkdir($nomChemin, 0777, true);
+
+			//ajout de la nouvelle collection
+			$insert = $link->prepare('INSERT INTO collection(nom_collection, date_creation, collection_visible,
+															code_acces_collection, mail_photographe)
+													VALUES (?, ?, ?, ?, ?)');
+			$insert->execute(array($_POST['nvCol'], $dateImport, $colVisible, $codeAccesCol, $_COOKIE['login']));
+
+			//récupérer l'$idCollection
+			$res = $link->prepare('SELECT id_collection FROM collection WHERE nom_collection = ?');
+
+			$res->execute(array($_POST['nvCol']));
+
+			$tmp = $res->fetch();
+			$idCollection = $tmp[0];
+		} else {
+			$idCollection = $tmpExist[0];
+		}
+
+	}
+
+	echo "id collection : ".$idCollection."</br>";
 
 /******************************* Fin Récupération des données ********************************/
 
@@ -133,7 +171,11 @@
 					$nomImg = $dataImg[0];
 					$chemin = "./img/".$_COOKIE['login']."/".$nomImg.".".$extension_upload;
 				    $resultat = move_uploaded_file($_FILES['img']['tmp_name'],$chemin);
-				}// besoin d'un else si image dans une collection
+				} else {
+					$nomImg = $dataImg[0];
+					$chemin = $nomChemin."/".$nomImg.".".$extension_upload;
+				    $resultat = move_uploaded_file($_FILES['img']['tmp_name'],$chemin);
+				}
 			if ($resultat) echo "Transfert réussi";
 			}
 /******************************* Fin Upload de la photo *************************************/

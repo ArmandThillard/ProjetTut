@@ -17,3 +17,10 @@ SELECT * FROM image WHERE code_acces_image = ? AND desc_image = ?
                                             and lien_image = ? and mail_photographe = ? and nom_image = ?
                                             and id_collection = ? and prix_ht_image = ?
 /********************************* Fin Image *************************************/
+
+/********************************* Collection *************************************/
+INSERT INTO collection(nom_collection, date_creation, collection_visible,
+															code_acces_collection, mail_photographe)
+													VALUES ('testCol1', "2018-05-05", 1, null, 'hugo@gmail.com')
+
+/********************************* Fin Collection *************************************/

@@ -92,11 +92,23 @@
 									echo "<option>".$data['nom_collection'];
 								}
 						        echo "	</select>
+								<div class='input-group'>
+									<input class='form-control' id='saisieNvCol' name='nvCol' style='display:none;'></input>
+									<div class='input-group-append'>
+										<button type='button' class='btn' name='nouvelleCollection' onclick='addFieldCol()'>Ajouter</button>
+									</div>
+								</div>
 							</div>
 						</div>";
 				} else {
 					echo "<div class='col-sm-4'>
 							<label class='col-sm-6 col-form-label col-sm-offset-1'>Aucune collection </label>
+							<div class='input-group'>
+								<input class='form-control' id='saisieNvCol' name='nvCol' style='display:none;'></input>
+								<div class='input-group-append'>
+									<button type='button' class='btn' name='nouvelleCollection' onclick='addFieldCol()'>Ajouter</button>
+								</div>
+							</div>
 							</div>
 						</div>";
 					echo "<input type=text name=nomCollection style='display:none;'></input>";
@@ -114,7 +126,7 @@
 			</div>
 
 			<button type=submit class="btn btn-success" name="submit">Envoyer</>
-
+			<script src="./inc/js/functions.js"></script>
 		</form>
 	</div>
 </body>
