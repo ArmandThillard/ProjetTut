@@ -7,29 +7,36 @@
     } catch(Exception $e) {
            die('Erreur : '.$e->getMessage());
     }
+    if(!isset($_GET['search'])){
+        $_GET['search'] = '';
+    }
 ?>
 <div class="container-fluid">
-    <div class="header"></div>
+
     <div class="row">
-        <div id="filters" class="col-3">
-            <div id="prix">
-                <label>Min</label><input name="prix-min" type="number"> - <label>Max</label><input name="prix-max" type="number">
+        <div class="col-3 tri">
+            <div id="prix" class="filters rounded">
+                <h2 class="font-weight-bold text-center"><small>Trier par prix</small></h2>
+                <label>Min</label><input name="prix-min" type="number"> - <input name="prix-max" type="number"><label>Max</label>
             </div>
 
-            <div id="categories">
+            <div id="categories" class="filters rounded">
+                <h2 class="font-weight-bold text-center"><small>Catégories</small></h2>
                 <?php
                     $res = $link->query("SELECT id_categorie, nom_categorie FROM categorie");
                     while($data = $res->fetch()){
-                        echo "<input type='checkbox' name=".$data['id_categorie']."value=".$data['nom_categorie']." ><label>".ucfirst($data['nom_categorie'])."</label>";
+                        echo "<input type='checkbox' name=".$data['id_categorie']." value=".$data['nom_categorie']." ><label>".ucfirst($data['nom_categorie'])."</label></br>";
                     }
                 ?>
             </div>
         </div>
         <div id="searchedImages" class="col-9">
+            <h1 class="font-weight-bold text-light"><small> Résultats de la recherche pour : <?=$_GET['search']?> </small></h1>
             <?php
                 if(!isset($_GET['search'])){
                     $_GET['search'] = '';
                 }
+                $_GET['search'] = strtolower($_GET['search']);
                 $search = explode(' ',$_GET['search']);
                 $requete = 'SELECT image.id_image id, image.lien_image lien FROM image, tag, referencer WHERE image.id_image = referencer.id_image AND tag.id_tag = referencer.id_tag AND ';
                 //recherche des mots-clés dans : TAGS, NOM_IMAGE
@@ -42,7 +49,8 @@
                         $requete = $requete.")";
                     }
                 }
-
+                $requete = $requete." AND image.image_visible = 1";
+                $requete = $requete." ORDER BY image.date_upload_image DESC";
                 $res = $link->query($requete);
                 $nbImages = 0;
                 echo '<div class="row">';
@@ -52,9 +60,9 @@
                         echo '</div><div class="row">';
                     }
                     ?>
-                        <div class="col-4 gallery-image">
+                        <div class="col-4">
                             <?php
-                            echo '<a href="./photo.php?id='.$data['id'].'"><img class="img-fluid" src="'.$data['lien'].'"></a>';
+                            echo '<a href="./photo.php?id='.$data['id'].'"><img class="img-fluid gallery-image" src="'.$data['lien'].'"></a>';
                             $nbImages++;
                             ?>
                         </div>
