@@ -12,13 +12,13 @@
 		<h1>Nouvelle photo</h1></br>
 		<form  method=post action="./ajoutPhoto.php" enctype="multipart/form-data">
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Nom</label>
+				<label class="col-sm-2 col-form-label col-sm-offset-2">Nom *</label>
 				<div class="col-sm-4 col-sm-offset-1">
 					<input name='nom_image' type=text class="form-control " />
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Description de l'image</label>
+				<label class="col-sm-2 col-form-label col-sm-offset-2">Description de l'image *</label>
 				<div class="col-sm-4 col-sm-offset-1">
 					<textarea class="form-control" name='desc_image' type=text></textarea>
 				</div>
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Prix H.T</label>
+				<label class="col-sm-2 col-form-label col-sm-offset-2">Prix H.T *</label>
 				<div class="col-sm-4 col-sm-offset-1">
 					<input class="form-control" name='prix_ht_image' type=text />
 				</div>
@@ -63,7 +63,7 @@
 
 				if($res->rowCount() != 0){
 					echo "<div class='form-group row'>
-							<label class='col-sm-2 col-form-label col-sm-offset-2'>Catégories </label>
+							<label class='col-sm-2 col-form-label col-sm-offset-2'>Catégories *</label>
 							<div class='col-sm-4'>
 								<select name='nomCategorie' class='form-control'/>
 								<option>";
