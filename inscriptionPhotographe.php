@@ -10,7 +10,7 @@
 <body>
 	<div class="text-center">
 		<h1 class="mt-lg-5">Inscrivez-vous</h1></br>
-		<form  method=post action="./ajoutClient.php">
+		<form  method=post action="./ajoutPhotographe.php">
             <div class="form-row">
                 <div class="col-6 text-left">
                     <h2 class="col-4 offset-5 text-center">Vous</h2>
