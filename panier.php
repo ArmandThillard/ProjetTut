@@ -22,8 +22,9 @@
 	    $res->execute(array($_COOKIE['login']));
 
     	if($res->rowCount() != 0){
-    		echo "<div class='col-sm-10 col-sm-offset-1'>
-                    <table class='table table-image text-center'>
+    		echo "<div class='container col-sm-10 text-center mt-5'>
+                    <h1> Mon Panier </h1>
+                    <table class='table table-image mt-5'>
                         <tr>
                             <th>Photo</th>
                             <th>Titre</th>
