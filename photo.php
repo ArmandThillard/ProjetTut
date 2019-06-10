@@ -9,13 +9,48 @@
     require('./search.php');
 ?>
 <body>
+	<link rel="stylesheet" type="text/css" href="./style/tmp.css?id=v2">
+
+	<?php if (isset($_GET['page'])) {?>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#myModal").modal('show');
+			});
+		</script>
+		<div id="myModal" class="modal fade">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">Félicitations!</h4>
+		            </div>
+		            <div class="modal-body">
+						<p>Vos articles ont bien été ajoutés à votre panier!</p>
+						<p>Voulez-vous continuer vos recherches?</p>
+		            </div>
+					<div class="maodal-footer">
+						<button type="button" class="btn">Continuer</button>
+						<button type="button" class="btn btn-primary">Aller au panier</button>
+					</div
+		        </div>
+		    </div>
+		</div>
+	<?php } ?>
+
     <?php
         include('./inc/connection/connect_info.php');
         try {
-            $link = new PDO("mysql:host=$server;dbname=$db",$login, $mdp);
+            $link = new PDO("mysql:host=$server;dbname=$db;charset=utf8",$login, $mdp);
         } catch(Exception $e) {
             die('Erreur : '.$e->getMessage());
         }
+
+		if (isset($_GET['page'])) {
+			// code...
+		}
 
         //récupérer les infos sur la photo
         $res = $link->prepare('SELECT * FROM image WHERE id_image = ?');
@@ -23,11 +58,9 @@
 
         $donneesImages = $res->fetch();
 
+		$prixImgTTC = $donneesImages['prix_ht_image']*1.2;
+
         $dimensionsImg = getimagesize($donneesImages[9]);
-
-        if($dimensionsImg[0] > $dimensionsImg[1]) {
-
-        }
 
     ?>
 
@@ -42,36 +75,84 @@
             ?>
         </div>
         <div class="col-6" style="outline : dashed red;">
-            <div class="container text-center">
-        		<h1>Title</h1></br>
-        		<form  method=post action="#">
+            <div class="container text-left">
+        		<form class="mt-5"  method=post action="./ajoutPanier.php?id=<?php echo $donneesImages['id_image']; ?>">
+        			<div class="form-group text-left row">
+        				<label class="col-10  font-weight-bold h2"><?php echo $donneesImages[1]; ?></label>
+        			</div>
+					<div class="form-group text-left row">
+        				<label class="col-10 col-form-label"><?php echo $donneesImages[3]; ?></label>
+        			</div>
+					<div class="form-group row">
+						<label class="col-sm-1 col-form-label">Prix </label>
+						<div class="col-sm-1 col-sm-offset-1">
+							<label class="col-form-label" name='prixImgTTC' type=text ><?php echo $prixImgTTC.'€'; ?></label>
+						</div>
+					</div>
         			<div class="form-group row">
-        				<label class="col-sm-1 col-form-label col-sm-offset-2">Label</label>
-        				<div class="col-sm-4 col-sm-offset-1">
-        					<input name='#' type=text class="form-control " />
+        				<label class="col-sm-1 col-form-label ">Quantité </label>
+        				<div class="col-sm-1 col-sm-offset-1">
+        					<input class="form-control" name='qte' type=text value="1"/>
         				</div>
         			</div>
-        			<div class="form-group row">
-        				<label class="col-sm-1 col-form-label col-sm-offset-2">Label </label>
-        				<div class="col-sm-4 col-sm-offset-1">
-        					<input class="form-control" name='#' type=text />
-        				</div>
-        			</div>
+					<?php
+						include('./inc/connection/connect_info.php');
+						try {
+							$link = new PDO("mysql:host=$server;dbname=$db;charset=utf8",$login, $mdp);
+						} catch(Exception $e) {
+							die('Erreur : '.$e->getMessage());
+						}
 
-        			<button type=submit class="btn btn-success" name="submit">Envoyer</>
+						//Liste déroulante pour le choix des catégories
+						$res = $link->prepare('SELECT * FROM support');
 
+						$res->execute(array());
+
+						if($res->rowCount() != 0){
+							echo "<div class='form-group row'>
+									<label class='col-sm-1 col-form-label'>Support</label>
+									<div class='col-sm-3'>
+										<select name='support' class='form-control custom-select' id='inputGroupSelect01'/>";
+										while($dataSup =  $res->fetch()){
+											$prixTTC = $dataSup['prix_ht_support']*1.20;
+											if ($dataSup['type_support'] == 'Papier photo') {
+												echo "<option selected>".$dataSup['type_support'].' - '.$prixTTC.'€';
+											} else {
+												echo "<option>".$dataSup['type_support'].' - '.$prixTTC.'€';
+											}
+										}
+								        echo "	</select>
+									</div>
+								</div>";
+						} else {
+							echo 'Support : Aucune support disponible';
+						}
+						?>
+
+        			<button type=submit class="btn btn-success" name="submit">Ajouter au panier</button>
         		</form>
-            <div class="text-justify">
-                <ul class="">
-                    <li><label><?php echo $donneesImages[1]; ?></label></li>
-                    <li><label><?php echo $donneesImages[3]; ?></label></li>
-                </ul>
-            </div>
         </div>
     </div>
-
-
-
+	<!--Modal-->
+	<div class="modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Modal title</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <p>Modal body text goes here.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </body>
 <?php
     require('./footer.php');

@@ -24,3 +24,9 @@ INSERT INTO collection(nom_collection, date_creation, collection_visible,
 													VALUES ('testCol1', "2018-05-05", 1, null, 'hugo@gmail.com')
 
 /********************************* Fin Collection *************************************/
+
+/********************************* Support *************************************/
+
+INSERT INTO `support`(`type_support`, `dimension_min`, `dimension_max`, `prix_ht_support`) VALUES ("T-shirt", 0, 2000, 12.00)
+
+/********************************* Fin Support *************************************/
