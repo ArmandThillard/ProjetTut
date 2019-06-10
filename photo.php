@@ -9,12 +9,13 @@
     require('./search.php');
 ?>
 <body>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="./style/tmp.css?id=v2">
 
 	<?php if (isset($_GET['page'])) {?>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#myModal").modal('show');
@@ -24,16 +25,16 @@
 		    <div class="modal-dialog">
 		        <div class="modal-content">
 		            <div class="modal-header">
+						<h4 class="modal-title">Félicitations!</h4>
 		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title">Félicitations!</h4>
 		            </div>
 		            <div class="modal-body">
 						<p>Vos articles ont bien été ajoutés à votre panier!</p>
 						<p>Voulez-vous continuer vos recherches?</p>
 		            </div>
-					<div class="maodal-footer">
-						<button type="button" class="btn">Continuer</button>
-						<button type="button" class="btn btn-primary">Aller au panier</button>
+					<div class="modal-footer">
+						<button type="button" class="btn" onclick="window.location.href='./recherche.php'">Continuer</button>
+						<button type="button" class="btn btn-primary" onclick="window.location.href='./panier.php'">Aller au panier</button>
 					</div
 		        </div>
 		    </div>
