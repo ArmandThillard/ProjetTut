@@ -77,9 +77,10 @@
     <?php
                 }
     	}else{
-            echo "<h1 class='text-center' style=' margin-top : 20vh; margin-bottom : 10vh;'>Aucun usager enregistré dans le cabinet</h1>";
-			echo "<button type=button class='btn col-sm-1 col-sm-offset-4' onclick=window.location.href='./gestionUsagers.php'>Retour</button>";
-			echo "<button type=button class='btn col-sm-1 col-sm-offset-2' onclick=window.location.href='./saisieUsager.php?'>Nouvel usager</button>";
+            echo "<div class='text-center'>
+                    <h1 class='text-center' style=' margin-top : 20vh; margin-bottom : 10vh;'>Vous n'avez pas encore enregitré d'article...</h1>
+                    <button type=button class='btn col-sm-1 mr-5' onclick=window.location.href='./index.php'>Page d'accueil</button>
+                </div>";
     	}
     ?>
 
