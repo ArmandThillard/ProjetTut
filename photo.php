@@ -9,13 +9,11 @@
     require('./search.php');
 ?>
 <body>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="./style/tmp.css?id=v2">
 
 	<?php if (isset($_GET['page'])) {?>
-
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#myModal").modal('show');
@@ -49,10 +47,6 @@
             die('Erreur : '.$e->getMessage());
         }
 
-		if (isset($_GET['page'])) {
-			// code...
-		}
-
         //récupérer les infos sur la photo
         $res = $link->prepare('SELECT * FROM image WHERE id_image = ?');
 		$res->execute(array($_GET['id']));
@@ -61,19 +55,11 @@
 
 		$prixImgTTC = $donneesImages['prix_ht_image']*1.2;
 
-        $dimensionsImg = getimagesize($donneesImages[9]);
-
     ?>
 
     <div class="row">
         <div class="col-6" style="outline : dashed red; height : 50vh;">
-            <?php
-                if($dimensionsImg[0] > $dimensionsImg[1] or $dimensionsImg[0] == $dimensionsImg[1]) {
-                    echo "<img class='img-fluid gallery-image' src='.$donneesImages[9].' style=' height : 100%;'>";
-                } else {
-                    echo "<img class='img-fluid gallery-image' src='.$donneesImages[9].' style=' width : 100%;'>";
-                }
-            ?>
+			<img class='img-fluid gallery-image' src=<?php echo $donneesImages[9]; ?> style=' height : 100%;'>
         </div>
         <div class="col-6" style="outline : dashed red;">
             <div class="container text-left">
