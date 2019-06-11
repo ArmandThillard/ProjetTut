@@ -33,7 +33,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn" onclick="window.location.href='./recherche.php'">Continuer</button>
 						<button type="button" class="btn btn-primary" onclick="window.location.href='./panier.php'">Aller au panier</button>
-					</div
+					</div>
 		        </div>
 		    </div>
 		</div>
