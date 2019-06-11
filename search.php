@@ -1,7 +1,7 @@
 <div class="container-fluid searchDiv">
     <div class="container block searchbar">
         <div class="form-responsive">
-            <form method="get" action="./recherche.php">
+            <form id="searchForm" method="get" action="./recherche.php">
                 <div class="input-group">
                     <input class="form-control input-group" name="search" placeholder="Rechercher">
                     <span class="input-group-btn">

@@ -17,7 +17,7 @@
         <div class="col-3 tri">
             <div id="prix" class="filters rounded">
                 <h2 class="font-weight-bold text-center"><small>Trier par prix</small></h2>
-                <label>Min</label><input name="prix-min" type="number"> - <input name="prix-max" type="number"><label>Max</label>
+                <label>Min</label><input name="prix-min" type="number" form="searchForm"> - <input name="prix-max" type="number" form="searchForm"><label>Max</label>
             </div>
 
             <div id="categories" class="filters rounded">
@@ -25,7 +25,7 @@
                 <?php
                     $res = $link->query("SELECT id_categorie, nom_categorie FROM categorie");
                     while($data = $res->fetch()){
-                        echo "<input type='checkbox' name=".$data['id_categorie']." value=".$data['nom_categorie']." ><label>".ucfirst($data['nom_categorie'])."</label></br>";
+                        echo "<input type='checkbox' form='searchForm' name='cat' value=".$data['nom_categorie']." ><label>".ucfirst($data['nom_categorie'])."</label></br>";
                     }
                 ?>
             </div>
@@ -38,7 +38,8 @@
                 }
                 $_GET['search'] = strtolower($_GET['search']);
                 $search = explode(' ',$_GET['search']);
-                $requete = 'SELECT image.id_image id, image.lien_image lien FROM image, tag, referencer WHERE image.id_image = referencer.id_image AND tag.id_tag = referencer.id_tag AND ';
+                $requete = 'SELECT image.id_image id, image.lien_image_fili lien FROM image, tag, referencer, correspondre WHERE image.id_image = referencer.id_image
+                                AND tag.id_tag = referencer.id_tag AND image.id_image = correspondre.id_image AND ';
                 //recherche des mots-clés dans : TAGS, NOM_IMAGE
                 $requete = $requete.'(';
                 for($i = 0; $i < count($search); $i++){
@@ -49,13 +50,30 @@
                         $requete = $requete.")";
                     }
                 }
+                // Insertion du prix si renseigné
+                if(isset($_GET['prix-min']) && !empty($_GET['prix-min'])){
+                    $requete = $requete." AND image.prix_ht_image >= ".$_GET['prix-min'];
+                }
+                if(isset($_GET['prix-max']) && !empty($_GET['prix-min'])){
+                    $requete = $requete." AND image.prix_ht_image <= ".$_GET['prix-max'];
+                }
+                // Insertion des catégories si cochées
+                $res = $link->query("SELECT id_categorie FROM categorie");
+                while($data = $res->fetch()){
+                    if(isset($_GET[$data['id_categorie']])){
+                        $requete = $requete." AND correspondre.id_categorie = ".$data['id_categorie'];
+                    }
+                }
+
+                // Images visibles uniquement
                 $requete = $requete." AND image.image_visible = 1";
+                // De la plus récente à la plus ancienne
                 $requete = $requete." ORDER BY image.date_upload_image DESC";
+                echo $requete;
                 $res = $link->query($requete);
                 $nbImages = 0;
                 echo '<div class="row">';
                 while($data = $res->fetch()){
-
                     if($nbImages % 3 == 0){
                         echo '</div><div class="row">';
                     }
