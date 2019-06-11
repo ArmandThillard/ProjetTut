@@ -267,7 +267,7 @@
 			/**************************** update de la photo avec les liens des images *********************************************/
 
 
-			echo 'image importée';
+			header("Location: ./saisiePhoto.php?etat=importee");
 		} else {
 			echo 'échec import';
 		}
@@ -276,10 +276,6 @@
 
 
 	} else {
-		echo 'image existante';
+		header("Location: ./saisiePhoto.php?etat=existe");
 	}
-
-
-	echo "</br>";
-	echo "<a href='/saisiePhoto.php'>Retour</a>";
 ?>

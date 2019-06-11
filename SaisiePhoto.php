@@ -6,43 +6,104 @@
 </head>
 <?php
     require('./header.php');
+
+	if (isset($_GET['etat'])) {
+		if ($_GET['etat'] == 'importee') {
+?>
+			<!--Modal erreur mdp-->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#myModal").modal('show');
+				});
+			</script>
+			<div id="myModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Félicitations!</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p>Vous venez d'ajouter une photo avec succès.</p>
+							<p>Que voulez-vous faire à présent?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn" onclick="window.location.href='./saisiePhoto.php'">Ajouter une photo</button>
+							<button type="button" class="btn btn-primary" onclick="window.location.href='./index.php'">Page d'accueil</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Fin modal erreur mdp-->
+<?php
+		} else {
+?>
+			<!--Modal erreur mdp-->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#myModal").modal('show');
+				});
+			</script>
+			<div id="myModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Oups!</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p>L'image que vous avez vouluu ajouter existe déjà</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn" onclick="window.location.href='./saisiePhoto.php'">Ajouter une photo</button>
+							<button type="button" class="btn btn-primary" onclick="window.location.href='./index.php'">Page d'accueil</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Fin modal erreur mdp-->
+<?php
+		}
+	}
 ?>
 <body style="background-color: white;">
 	<div class="container text-center">
 		<h1>Nouvelle photo</h1></br>
 		<form  method=post action="./ajoutPhoto.php" enctype="multipart/form-data">
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Nom *</label>
+				<label class="col-sm-4 col-form-label col-sm-offset-2">Nom *</label>
 				<div class="col-sm-4 col-sm-offset-1">
 					<input name='nom_image' type=text class="form-control " />
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Description de l'image *</label>
+				<label class="col-sm-4 col-form-label col-sm-offset-2">Description de l'image *</label>
 				<div class="col-sm-4 col-sm-offset-1">
 					<textarea class="form-control" name='desc_image' type=text></textarea>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Image privée</label>
+				<label class="col-sm-4 col-form-label col-sm-offset-2">Image privée</label>
 				<div class="col-sm-4 col-sm-offset-1">
 					<input class="form-control" name='image_privee' type=checkbox />
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Code d'accès</label>
+				<label class="col-sm-4 col-form-label col-sm-offset-2">Code d'accès</label>
 				<div class="col-sm-4 col-sm-offset-1">
 					<input class="form-control" name='code_acces_image' type=password />
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Prix H.T *</label>
+				<label class="col-sm-4 col-form-label col-sm-offset-2">Prix H.T *</label>
 				<div class="col-sm-4 col-sm-offset-1">
 					<input class="form-control" name='prix_ht_image' type=text />
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Mots-clés</label>
+				<label class="col-sm-4 col-form-label col-sm-offset-2">Mots-clés</label>
 				<div class="col-sm-4 col-sm-offset-1">
 					<input class="form-control" name='tag' type=text />
 				</div>
@@ -63,7 +124,7 @@
 
 				if($res->rowCount() != 0){
 					echo "<div class='form-group row'>
-							<label class='col-sm-2 col-form-label col-sm-offset-2'>Catégories *</label>
+							<label class='col-sm-4 col-form-label col-sm-offset-2'>Catégories *</label>
 							<div class='col-sm-4'>
 								<select name='nomCategorie' class='form-control'/>
 								<option>";
@@ -83,7 +144,7 @@
 				$res->execute(array('mail' => $_SESSION['login']));
 
 				echo "<div class='form-group row'>
-						<label class='col-sm-2 col-form-label col-sm-offset-2'>Collections </label>";
+						<label class='col-sm-4 col-form-label col-sm-offset-2'>Collections </label>";
 				if($res->rowCount() != 0){
 					echo "	<div class='col-sm-4'>
 								<select name='nomCollection' class='form-control'/>
@@ -118,10 +179,11 @@
 
 			<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label col-sm-offset-2">Image</label>
-				<div class="custom-file col-sm-4 col-sm-offset-1">
-						<input name='img' type=file class="form-control custom-file-input" id="customFile" />
-						<label class="custom-file-label" for="customFile"></label>
+				<label class="col-sm-4 col-form-label col-sm-offset-2">Image</label>
+				<div class=" col-sm-4 col-sm-offset-1">
+						<input type="file" class="custom-file-input">
+    					<label class="custom-file-label text-left">Choose file...</label>
+
 				</div>
 			</div>
 
@@ -130,14 +192,7 @@
 		</form>
 	</div>
 </body>
-<!--Boutons ajout nouvelles catégorie et collection
-	<input id="saisieNvCat" style="display:none;"></input>
-	<button type="button" name="nouvelleCategorie" onclick="addFieldCat()">+</button>
-	</br>
-	<input id="saisieNvCol" style="display:none;"></input>
-	<button type="button" name="nouvelleCollection" onclick="addFieldCol()">+</button>
-	</br>
-	<script src="./inc/js/functions.js"></script>
-	<button type=submit name="submit">Envoyer</>
-	<button type=reset name="reset">Reset</>
--->
+<?php
+    require('./footer.php');
+?>
+<!--
