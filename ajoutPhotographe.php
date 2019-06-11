@@ -38,9 +38,9 @@
 
 				//créer le répertoire de base
 				$nomCheminOriginale = "./img/".$_POST['adresseMail']."/originale";
-				$nomCheminFiligramme = "./img/".$_POST['adresseMail']."/filigramme";
+				$nomCheminFiligrane = "./img/".$_POST['adresseMail']."/filigrane";
 				mkdir($nomCheminOriginale, 0777, true);
-				mkdir($nomCheminFiligramme, 0777, true);
+				mkdir($nomCheminFiligrane, 0777, true);
 
 				header("Location: ./inscriptionPhotographe.php?page=ok");
 			}

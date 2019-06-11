@@ -1,7 +1,10 @@
+
+
 <?php
+	require('./header.php');
 	include('./inc/connection/connect_info.php');
 	try {
-		$link = new PDO("mysql:host=$server;dbname=$db",$login, $mdp);
+		$link = new PDO("mysql:host=$server;dbname=$db;charset=utf8",$login, $mdp);
 	} catch(Exception $e) {
 		die('Erreur : '.$e->getMessage());
 	}
@@ -25,65 +28,25 @@
 	echo "id catégorie : ".$idCategorie."</br>";
 
 	//récupérer id_collection à partir du nom_collection de la liste déroulante
-	$collection = $link->prepare('SELECT id_collection FROM collection WHERE mail_photographe = :mail and nom_collection = :collection');
+	$collection = $link->prepare('SELECT id_collection, nom_collection FROM collection WHERE mail_photographe = :mail and nom_collection = :collection');
 
-	$collection->execute(array('mail' => $_COOKIE['login'], 'collection' => $_POST['nomCollection']));
+	$collection->execute(array('mail' => $_SESSION['login'], 'collection' => $_POST['nomCollection']));
 
-	//$tmp variable de type array contenant valeurs de $collection
 	$tmp = $collection->fetch();
 	$idCollection = $tmp[0];
+	$nomCollection = $tmp[1];
 
 
 	//Image privée?
-	if(isset($_POST['image_visible'])) {
-		$img_visible = true;
-	} else {
+	if(isset($_POST['image_privee'])) {
 		$img_visible = 0;
+		$codeAccesImg = $_POST['code_acces_image'];
+	} else {
+		$img_visible = true;
+		$codeAccesImg = '';
 	}
 	echo "img visible : ".$img_visible."</br>";
 	echo "mdp = ".$_POST['code_acces_image']."</br>";
-
-	//nouvelle collection
-	if (isset($_POST['nvCol'])) {
-
-		//collection focée visible
-		$colVisible = 1;
-		$codeAccesCol = null;
-
-		//vérifier si la collection existe
-		$res = $link->prepare('SELECT * FROM collection WHERE mail_photographe = ? and nom_collection = ?');
-
-		$res->execute(array($_COOKIE['login'], $_POST['nvCol']));
-
-		$tmpExist = $res->fetch();
-		echo 'tmpexiste :'.gettype($tmpExist).'</br>';
-		echo 'val tmpexiste :'.$tmpExist.'</br>';
-
-		if($tmpExist == NULL) {
-
-			//création du dossier collection
-			$nomChemin = "./img/".$_COOKIE['login']."/".$_POST['nvCol'];
-			mkdir($nomChemin, 0777, true);
-
-			//ajout de la nouvelle collection
-			$insert = $link->prepare('INSERT INTO collection(nom_collection, date_creation, collection_visible,
-															code_acces_collection, mail_photographe)
-													VALUES (?, ?, ?, ?, ?)');
-			$insert->execute(array($_POST['nvCol'], $dateImport, $colVisible, $codeAccesCol, $_COOKIE['login']));
-
-			//récupérer l'$idCollection
-			$res = $link->prepare('SELECT id_collection FROM collection WHERE nom_collection = ?');
-
-			$res->execute(array($_POST['nvCol']));
-
-			$tmp = $res->fetch();
-			$idCollection = $tmp[0];
-		} else {
-			$idCollection = $tmpExist[0];
-		}
-
-	}
-
 	echo "id collection : ".$idCollection."</br>";
 
 /******************************* Fin Récupération des données ********************************/
@@ -96,14 +59,14 @@
 			 										and mail_photographe = ? and nom_image = ?
 													and id_collection = ? and prix_ht_image = ?');
 
-		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $_COOKIE['login'],
+		$res->execute(array($codeAccesImg, $_POST['desc_image'], $_SESSION['login'],
 							$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 	} else {
 		$res = $link->prepare('SELECT * FROM image WHERE code_acces_image = ? AND desc_image = ?
 			 										and mail_photographe = ? and nom_image = ?
 													and id_collection is ? and prix_ht_image = ?');
 
-		$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $_COOKIE['login'],
+		$res->execute(array($codeAccesImg, $_POST['desc_image'], $_SESSION['login'],
 							$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 	}
 
@@ -115,9 +78,9 @@
 		$insert = $link->prepare('INSERT INTO image(code_acces_image, date_upload_image, desc_image, image_visible,
 			 									mail_photographe, nom_image, id_collection, prix_ht_image)
 												VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-		$insert->execute(array($_POST['code_acces_image'], $dateImport,
+		$insert->execute(array($codeAccesImg, $dateImport,
 								$_POST['desc_image'], $img_visible,
-							 	$_COOKIE['login'], $_POST['nom_image'],
+							 	$_SESSION['login'], $_POST['nom_image'],
 								$idCollection, $_POST['prix_ht_image']));
 
 /******************************* Fin Ajout de l'image ********************************/
@@ -129,26 +92,115 @@
 				 										and mail_photographe = ? and nom_image = ?
 														and id_collection = ? and prix_ht_image = ?');
 
-			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $_COOKIE['login'],
+			$res->execute(array($codeAccesImg, $_POST['desc_image'], $_SESSION['login'],
 								$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 		} else {
 			$res = $link->prepare('SELECT * FROM image WHERE code_acces_image = ? AND desc_image = ?
 				 										and mail_photographe = ? and nom_image = ?
 														and id_collection is ? and prix_ht_image = ?');
 
-			$res->execute(array($_POST['code_acces_image'], $_POST['desc_image'], $_COOKIE['login'],
+			$res->execute(array($codeAccesImg, $_POST['desc_image'], $_SESSION['login'],
 								$_POST['nom_image'], $idCollection, $_POST['prix_ht_image']));
 		}
+
 		$dataImg = $res->fetch();
 
-/******************************* Fin Vérifications après ajout ********************************/
+		/***********************************************************************************************************************************/
+		/*************************************************** Traitements suite à ajout photo *******************************************/
+		/***********************************************************************************************************************************/
 
+		if ( count($dataImg)!= 0) {
 
-		if ($dataImg != NULL) {
+			/**************************** Lien catégorie/image **************************************/
+			$insert = $link->prepare('INSERT INTO correspondre(id_categorie, id_image)
+													VALUES (?, ?)');
+			$insert->execute(array($idCategorie, $dataImg[0]));
+			/**************************** Fin Lien catégorie/image **************************************/
 
-/******************************* Upload de la photo *************************************/
+			/*************************** Traitement des tags *********************************************/
+			//vérifier si tag existe
+			if ($motsCles[0] != '') {
+				foreach ($motsCles as $value) {
+					$tag = $link->prepare('SELECT * FROM tag WHERE nom_tag = ?');
+
+					$tag->execute(array($value));
+
+					//si tag n'existe pas, l'ajouter
+					if ($tag->fetch() == NULL) {
+						$insert = $link->prepare('INSERT INTO tag(nom_tag)
+																VALUES (?)');
+						$insert->execute(array($value));
+					}
+
+					//récupération id tag
+					$tag = $link->prepare('SELECT * FROM tag WHERE nom_tag = ?');
+
+					$tag->execute(array($value));
+					$infoTag = $tag->fetch();
+
+					echo "id tag : ".$infoTag[0]."</br>";
+
+					//lier img et tag
+					$insert = $link->prepare('INSERT INTO referencer(id_tag, id_image)
+															VALUES (?, ?)');
+					$insert->execute(array($infoTag[0], $dataImg[0]));
+
+					echo "nv col post : ".$_POST['nvCol']."</br>";
+				}
+			}
+
+			/*************************** Fin Traitement des tags *********************************************/
+
+			/***************************** Traitement nouvelle collection ********************************/
+			if ($_POST['nvCol'] != '') {
+				echo 'isset marche</br>';
+				//vérifier si la collection existe
+				$col = $link->prepare('SELECT * FROM collection WHERE nom_collection = ? and mail_photographe = ?');
+
+				$col->execute(array($_POST['nvCol'], $_SESSION['login']));
+
+				//Ajouter la collection si non existante
+				if ($col->fetch() == NULL) {
+					echo 'la collection n existe pas</br>';
+					//forcer la collection visible
+					$collectionVisible = true;
+					$codeAccesCollection = '';
+
+					$insert = $link->prepare('INSERT INTO collection(nom_collection, date_creation, collection_visible, code_acces_collection, mail_photographe)
+															VALUES (?, ?, ?, ?, ?)');
+					$insert->execute(array($_POST['nvCol'], $dateImport, $collectionVisible, $codeAccesCollection, $_SESSION['login']));
+
+					//créer le dossier de la collection dans le dossier photographe/originale
+					$nomCheminNvColOriginale = "./img/".$_SESSION['login']."/originale/".$_POST['nvCol'];
+					mkdir($nomCheminNvColOriginale, 0777, true);
+					//créer le dossier de la collection dans le dossier photographe/filigrane
+					$nomCheminNvColFiligrane = "./img/".$_SESSION['login']."/filigrane/".$_POST['nvCol'];
+					mkdir($nomCheminNvColFiligrane, 0777, true);
+
+				}
+
+				//récupérer l'id de la collection
+				$col = $link->prepare('SELECT * FROM collection WHERE nom_collection = ? and mail_photographe = ?');
+
+				$col->execute(array($_POST['nvCol'], $_SESSION['login']));
+				$infoCol = $col->fetch();
+
+				echo "id col : ".$infoCol[0]."</br>";
+				$idCollection = $infoCol[0];
+
+				//update de l'image avec l'ajout de la collection
+				$updateImg = $link->prepare('UPDATE image SET id_collection = ? WHERE id_image = ?');
+
+				$updateImg->execute(array($infoCol[0], $dataImg[0]));
+
+				$nomCollection = $_POST['nvCol'];
+
+			}
+			/***************************** Fin Traitement nouvelle collection ********************************/
+
+			/***************************** Upload de la photo ********************************/
 			$maxsize = $_POST['MAX_FILE_SIZE'];
-			$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
+			$extensions_valides = array( 'jpg' , 'jpeg');
 			//1. strrchr renvoie l'extension avec le point (« . »).
 			//2. substr(chaine,1) ignore le premier caractère de chaine.
 			//3. strtolower met l'extension en minuscules.
@@ -161,92 +213,73 @@
 			*/
 
 			//Contrôles image
-			if ($_FILES['img']['error'] > 0) $erreur = "Erreur lors du transfert";
-			if ($_FILES['img']['size'] > $maxsize) $erreur = "Le fichier est trop gros";
+			//if ($_FILES['img']['error'] > 0) $erreur = "Erreur lors du transfert";
+			//if ($_FILES['img']['size'] > $maxsize) $erreur = "Le fichier est trop gros";
 
-			if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
+			//if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
 
 			if ($_FILES['img']['error'] <= 0 and $_FILES['img']['size'] <= $maxsize and in_array($extension_upload,$extensions_valides)) {
 				if ($idCollection == NULL) {
+					echo 'id collection null à l upload</br>';
 					$nomImg = $dataImg[0];
-					$chemin = "./img/".$_COOKIE['login']."/".$nomImg.".".$extension_upload;
-				    $resultat = move_uploaded_file($_FILES['img']['tmp_name'],$chemin);
+					$cheminImgOriginale = "./img/".$_SESSION['login']."/originale/".$nomImg.".".$extension_upload;
+				    $resultat = move_uploaded_file($_FILES['img']['tmp_name'],$cheminImgOriginale);
 				} else {
+					echo 'id collection non null à l upload</br>';
 					$nomImg = $dataImg[0];
-					$chemin = $nomChemin."/".$nomImg.".".$extension_upload;
-				    $resultat = move_uploaded_file($_FILES['img']['tmp_name'],$chemin);
+					$cheminImgOriginale = "./img/".$_SESSION['login']."/originale/".$nomCollection."/".$nomImg.".".$extension_upload;
+				    $resultat = move_uploaded_file($_FILES['img']['tmp_name'],$cheminImgOriginale);
 				}
 			if ($resultat) echo "Transfert réussi";
+
+			/**************************************** copier l'image avec un filigrane************************************/
+			//créer le chemin vers le filigrane
+			if ($idCollection == NULL) {
+				echo 'id collection null au filigrane</br>';
+				$cheminImgFiligrane = "./img/".$_SESSION['login']."/filigrane/".$nomImg.".".$extension_upload;
+			} else {
+				echo 'id collection non null au filigrane</br>';
+				$cheminImgFiligrane = "./img/".$_SESSION['login']."/filigrane/".$nomCollection."/".$nomImg.".".$extension_upload;
 			}
-/******************************* Fin Upload de la photo *************************************/
+			// Chargement de l'image dans une variable
+		    $img = ImageCreateFromJPEG($cheminImgOriginale);
 
-/****************************** Ajouter le lien de l'image à la bdd *******************************/
+		    // Couleur du texte au format RGB
+		    $textcolor = imagecolorallocate($img, 224, 34, 34);
 
-			$res = $link->prepare('UPDATE image SET lien_image = ? WHERE id_image = ?');
+		    // Le texte en question
+		    imagestring($img, 5, 10, 10, 'Horizon', $textcolor);
 
-			$res->execute(array($chemin, $nomImg));
+		    // Maintenant, envoyer les données de l'image
+		    imagejpeg ($img, $cheminImgFiligrane, 100);
 
-
-/****************************** Fin Ajouter le lien de l'image à la bdd *******************************/
-
-/******************************* Lien categorie/img ********************************/
-			echo "dataImg : ".$dataImg[0]."</br>";
-			//liaison categorie-image
-
-				$insert = $link->prepare('INSERT INTO correspondre(id_categorie, id_image)
-														VALUES (?, ?)');
-				$insert->execute(array($idCategorie, $dataImg[0]));
-
-/******************************* Fin Lien categorie/img ********************************/
-
-
-/******************************* Traitement des tags ********************************/
-			//vérification/ajout des tags
-			$idTag = array();
-			foreach ($motsCles as $val) {
-
-				//vérification
-				$res = $link->prepare('SELECT * FROM tag WHERE nom_tag = ?');
-				$res->execute(array($val));
-
-				$tagExistant = $res->fetch();
-
-				if ($tagExistant == NULL) {
-					//ajout
-					$insert = $link->prepare('INSERT INTO tag(nom_tag) VALUES (?)');
-					$insert->execute(array($val));
-
-					//vérification ajout
-					$res = $link->prepare('SELECT * FROM tag WHERE nom_tag = ?');
-					$res->execute(array($val));
-
-					$dataTag = $res->fetch();
-					array_push($idTag, $dataTag[0]);
-				} else {
-					array_push($idTag, $tagExistant[0]);
-				}
+		    // Libérons la mémoire
+		    imagedestroy($img);
 			}
-/******************************* Fin Traitement des tags ********************************/
+			/**************************************** Fin copier l'image avec un filigrane************************************/
 
-/******************************* Lien tags/img ********************************/
-			echo "dataImg : ".$dataImg[0]."</br>";
-			//liaison tags-image
-			foreach ($idTag as $val) {
-				$insert = $link->prepare('INSERT INTO referencer(id_tag, id_image)
-														VALUES (?, ?)');
-				$insert->execute(array($val, $dataImg[0]));
-			}
+			/***************************** Fin Upload de la photo ********************************/
 
-/******************************* Fin Lien tags/img ********************************/
+			/**************************** update de la photo avec les liens des images *********************************************/
+			$updateImg = $link->prepare('UPDATE image SET lien_image_originale = ?, lien_image_fili = ? WHERE id_image = ?');
+
+			$updateImg->execute(array($cheminImgOriginale, $cheminImgFiligrane, $dataImg[0]));
+			/**************************** update de la photo avec les liens des images *********************************************/
+
 
 			echo 'image importée';
 		} else {
-			echo "Echec de l'import";
+			echo 'échec import';
 		}
+
+/******************************* Fin Vérifications après ajout ********************************/
+
 
 	} else {
 		echo 'image existante';
 	}
+
+
 	echo "</br>";
 	echo "<a href='/saisiePhoto.php'>Retour</a>";
 ?>

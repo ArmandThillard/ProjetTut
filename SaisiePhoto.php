@@ -1,5 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org.TR.html4/loose.dtd">
-<html>
+<html lang="fr">
 <head>
 	<meta charset="utf-8" />
       <title>Saisie photo</title>
@@ -7,7 +7,7 @@
 <?php
     require('./header.php');
 ?>
-<body>
+<body style="background-color: white;">
 	<div class="container text-center">
 		<h1>Nouvelle photo</h1></br>
 		<form  method=post action="./ajoutPhoto.php" enctype="multipart/form-data">
@@ -26,7 +26,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label col-sm-offset-2">Image privée</label>
 				<div class="col-sm-4 col-sm-offset-1">
-					<input class="form-control" name='image_visible' type=checkbox />
+					<input class="form-control" name='image_privee' type=checkbox />
 				</div>
 			</div>
 			<div class="form-group row">
