@@ -1,4 +1,5 @@
 <?php
+	require('./header.php');
 	include('./inc/connection/connect_info.php');
 	try {
 		$link = new PDO("mysql:host=$server;dbname=$db",$login, $mdp);
@@ -36,8 +37,10 @@
 			} else {
 
 				//créer le répertoire de base
-				$nomChemin = "./img/".$_POST['adresseMail'];
-				mkdir($nomChemin, 0777, true);
+				$nomCheminOriginale = "./img/".$_POST['adresseMail']."/originale";
+				$nomCheminFiligramme = "./img/".$_POST['adresseMail']."/filigramme";
+				mkdir($nomCheminOriginale, 0777, true);
+				mkdir($nomCheminFiligramme, 0777, true);
 
 				header("Location: ./inscriptionPhotographe.php?page=ok");
 			}
