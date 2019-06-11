@@ -6,6 +6,98 @@
 </head>
 <?php
     require('./header.php');
+	//Début condition mdp différents
+	if (isset($_GET['tab'])) {
+
+		$tab = unserialize($_GET['tab']);
+
+		$mail = $tab[0];
+		$nomP = $tab[1];
+		$prenomP = $tab[2];
+		$telP = $tab[3];
+
+		$nomE = $tab[4];
+		$numS = $tab[5];
+		$rib = $tab[6];
+		$adresseE = $tab[7];
+		$cp = $tab[8];
+		$ville = $tab[9];
+		$telE = $tab[10];
+?>
+	<!--Modal erreur mdp-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#myModal").modal('show');
+		});
+	</script>
+	<div id="myModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Attention!</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>Les mots de passe ne correspondent pas</p>
+					<p>Veuillez saisir deux mots de passes identiques</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Fin modal erreur mdp-->
+<?php
+	} else {
+
+		$mail = '';
+		$nomP = '';
+		$prenomP = '';
+		$telP = '';
+
+		$nomE = '';
+		$numS = '';
+		$rib = '';
+		$adresseE = '';
+		$cp = '';
+		$ville = '';
+		$telE = '';
+	}
+	//fin condition mdp différents
+	//début condition inscription ok
+	if (isset($_GET['page'])) {
+		?>
+			<!--Modal connecté-->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#myModal").modal('show');
+				});
+			</script>
+			<div id="myModal" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Félicitations!</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p>Que voulez-vous faire?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn" onclick="window.location.href='./login.php'">Se connecter</button>
+							<button type="button" class="btn btn-primary" onclick="window.location.href='./index.php'">Page d'accueil</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Fin modal connecté-->
+
+		<?php
+	}
+	//fin condition inscription ok
 ?>
 <body>
 	<div class="text-center">
@@ -17,19 +109,19 @@
         			<div class="form-group row mt-sm-5">
         				<label class="col-sm-2 offset-2 col-form-label font-weight-bold text-left">Nom</label>
         				<div class="col-6">
-        					<input name='nomPhotographe' type=text class="form-control " />
+        					<input name='nomPhotographe' type=text class="form-control" value="<?php echo $nomP; ?>"/>
         				</div>
         			</div>
         			<div class="form-group row mt-sm-4">
         				<label class="col-sm-2 offset-2 col-form-label font-weight-bold text-left">Prénom</label>
         				<div class="col-6">
-        					<input class="form-control" name='prenomPhotographe' type=text />
+        					<input class="form-control" name='prenomPhotographe' type=text value="<?php echo $prenomP; ?>"/>
         				</div>
         			</div>
                     <div class="form-group row mt-sm-4">
         				<label class="col-sm-2 offset-2 col-form-label font-weight-bold text-left">Adresse email</label>
         				<div class="col-6">
-        					<input class="form-control" name='adresseMail' type=text />
+        					<input class="form-control" name='adresseMail' type=text value="<?php echo $mail; ?>"/>
         				</div>
         			</div>
                     <div class="form-group row mt-sm-4">
@@ -47,7 +139,7 @@
                     <div class="form-group row mt-sm-4 mb-sm-4">
         				<label class="col-sm-2 offset-2 col-form-label font-weight-bold text-left">Téléphone</label>
         				<div class="col-6">
-        					<input class="form-control" name='telPhotographe' type=text />
+        					<input class="form-control" name='telPhotographe' type=text value="<?php echo $telP; ?>"/>
         				</div>
         			</div>
                 </div>
@@ -57,43 +149,43 @@
         			<div class="form-group row mt-sm-5">
         				<label class="col-sm-2 col-form-label font-weight-bold text-left">Nom</label>
         				<div class="col-6">
-        					<input name='nomEntreprise' type=text class="form-control " />
+        					<input name='nomEntreprise' type=text class="form-control " value="<?php echo $nomE; ?>"/>
         				</div>
         			</div>
         			<div class="form-group row mt-sm-4">
         				<label class="col-sm-2 col-form-label font-weight-bold text-left">N° de SIRET</label>
         				<div class="col-6">
-        					<input class="form-control" name='numSiret' type=text />
+        					<input class="form-control" name='numSiret' type=text value="<?php echo $numS; ?>"/>
         				</div>
         			</div>
                     <div class="form-group row mt-sm-4">
         				<label class="col-sm-2 col-form-label font-weight-bold text-left">RIB</label>
         				<div class="col-6">
-        					<input class="form-control" name='rib' type=text />
+        					<input class="form-control" name='rib' type=text value="<?php echo $rib; ?>"/>
         				</div>
         			</div>
                     <div class="form-group row mt-sm-4">
         				<label class="col-sm-2 col-form-label font-weight-bold text-left">Adresse</label>
         				<div class="col-6">
-        					<input class="form-control" name='adresseEntreprise' type=text />
+        					<input class="form-control" name='adresseEntreprise' type=text value="<?php echo $adresseE; ?>"/>
         				</div>
         			</div>
                     <div class="form-group row mt-sm-4">
         				<label class="col-sm-2 col-form-label font-weight-bold text-left">Code Postal</label>
         				<div class="col-6">
-        					<input class="form-control" name='cpEntreprise' type=text />
+        					<input class="form-control" name='cpEntreprise' type=text value="<?php echo $cp; ?>"/>
         				</div>
         			</div>
                     <div class="form-group row mt-sm-4">
         				<label class="col-sm-2 col-form-label font-weight-bold text-left">Ville</label>
         				<div class="col-6">
-        					<input class="form-control" name='villeEntreprise' type=text />
+        					<input class="form-control" name='villeEntreprise' type=text value="<?php echo $ville; ?>"/>
         				</div>
         			</div>
                     <div class="form-group row mt-sm-4 mb-sm-5">
         				<label class="col-sm-2 col-form-label font-weight-bold text-left">Téléphone</label>
         				<div class="col-6">
-        					<input class="form-control" name='telEntreprise' type=text />
+        					<input class="form-control" name='telEntreprise' type=text value="<?php echo $telE; ?>"/>
         				</div>
         			</div>
                 </div>

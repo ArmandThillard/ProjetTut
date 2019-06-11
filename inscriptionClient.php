@@ -6,12 +6,15 @@
 </head>
 <?php
     require('./header.php');
-	//Début condition
-	if (isset($_GET['mail'])) {
-		$mail = $_GET['mail'];
-		$nom = $_GET['nom'];
-		$prenom = $_GET['prenom'];
-		$tel = $_GET['tel'];
+	//Début condition mdp différents
+	if (isset($_GET['tab'])) {
+
+		$tab = unserialize($_GET['tab']);
+
+		$mail = $tab[0];
+		$nom = $tab[1];
+		$prenom = $tab[2];
+		$tel = $tab[3];
 ?>
 	<!--Modal erreur mdp-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -45,7 +48,7 @@
 		$prenom = '';
 		$tel = '';
 	}
-	//fin condition
+	//fin condition mdp différents
 	//début condition inscription ok
 	if (isset($_GET['page'])) {
 		?>

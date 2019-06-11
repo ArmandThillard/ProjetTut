@@ -34,6 +34,15 @@
 			echo 'Le client existe déjà';
 		}
 	} else {
-		header("Location: ./inscriptionClient.php?mail=".$_POST['mail']."&nom=".$_POST['nom']."&prenom=".$_POST['prenom']."&tel=".$_POST['telClient']);
+		
+		$tab = [];
+		array_push($tab, $_POST['mail']);
+		array_push($tab, $_POST['nom']);
+		array_push($tab, $_POST['prenom']);
+		array_push($tab, $_POST['telClient']);
+
+		$tab = serialize($tab);
+
+		header("Location: ./inscriptionClient.php?tab=".$tab);
 	}
 ?>
