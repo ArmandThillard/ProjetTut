@@ -32,6 +32,31 @@
             <?php
                 }else{
             ?>
+            <?php
+
+                require('./inc/connection/connect_info.php');
+                try {
+                       $link = new PDO("mysql:host=$server;dbname=$db",$login, $mdp);
+                } catch(Exception $e) {
+                       die('Erreur : '.$e->getMessage());
+                }
+
+                //vérifier si l'utilisateur est un photographe
+                $res = $link->prepare('SELECT * FROM photographe WHERE mail_photographe = ?');
+                $res->execute(array($_SESSION['login']));
+
+                if ($res->rowCount() != 0) {
+                    echo "<li class='nav-item'><a class='nav-link' href='/saisiePhoto.php'><span class='glyphicon glyphicon-user'></span> Ajouter une photo</a></li>";
+                } else {
+                    //vérifier si l'utilisateur est un client
+                    $res = $link->prepare('SELECT * FROM client WHERE mail_client = ?');
+                    $res->execute(array($_SESSION['login']));
+                    if ($res->rowCount() != 0) {
+                        echo "<li class='nav-item'><a class='nav-link' href='/panier.php'><span class='glyphicon glyphicon-user'></span> Mon Panier </a></li>";
+                    }
+                }
+
+            ?>
             <li class="nav-item"><a class="nav-link" href="/monCompte.php"><span class="glyphicon glyphicon-user"></span>
                 <?php
                     if($_SESSION['user'] == 'A'){
@@ -43,26 +68,6 @@
                 ?>
             </a></li>
 
-                <?php
-
-                    require('./inc/connection/connect_info.php');
-                    try {
-                           $link = new PDO("mysql:host=$server;dbname=$db",$login, $mdp);
-                    } catch(Exception $e) {
-                           die('Erreur : '.$e->getMessage());
-                    }
-
-                    //vérifier si l'utilisateur est un photographe
-                    $res = $link->prepare('SELECT * FROM photographe WHERE mail_photographe = ?');
-                    $res->execute(array($_SESSION['login']));
-
-                    if ($res->rowCount() != 0) {
-                        echo "<li class='nav-item'><a class='nav-link' href='/saisiePhoto.php'><span class='glyphicon glyphicon-user'></span> Ajouter une photo</a></li>";
-                    } else {
-                        echo "<li class='nav-item'><a class='nav-link' href='/panier.php'><span class='glyphicon glyphicon-user'></span> Mon Panier </a></li>";
-                    }
-
-                ?>
             <button class="btn btn-danger navbar-btn" onClick="window.location='./inc/connection/disconnect.php';">Se déconnecter</button>
                 <?php
                     }
