@@ -71,7 +71,7 @@
 					<div class="form-group row">
 						<label class="col-sm-1 col-form-label">Prix </label>
 						<div class="col-sm-1 col-sm-offset-1">
-							<label class="col-form-label" name='prixImgTTC' type=text ><?php echo $prixImgTTC.'€'; ?></label>
+							<label class="col-form-label" name='prixImgTTC' type=text ><?php echo round($prixImgTTC.'€', 2); ?></label>
 						</div>
 					</div>
         			<div class="form-group row">
@@ -112,9 +112,15 @@
 						} else {
 							echo 'Support : Aucune support disponible';
 						}
-						?>
 
-        			<button type=submit class="btn btn-success" name="submit">Ajouter au panier</button>
+						//désactiver le bouton submit si non connecté
+						if (!isset($_SESSION['login'])) {
+							echo "<button type=submit class='btn btn-success' name='submit' disabled>Ajouter au panier</button>";
+						} else {
+							echo "<button type=submit class='btn btn-success' name='submit'>Ajouter au panier</button>";
+						}
+
+						?>
         		</form>
         </div>
     </div>

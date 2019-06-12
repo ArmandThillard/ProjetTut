@@ -19,7 +19,7 @@
 
 		$res = $link->prepare('SELECT * FROM acheter where mail_client = ?');
 
-	    $res->execute(array($_COOKIE['login']));
+	    $res->execute(array($_SESSION['login']));
 
     	if($res->rowCount() != 0){
     		echo "<div class='container col-sm-10 text-center mt-5'>
@@ -42,7 +42,7 @@
                 $image -> execute(array($infosAchat['id_image']));
 
                 $infosImage = $image->fetch();
-                $cheminimg = $infosImage['lien_image'];
+                $cheminimg = $infosImage['lien_image_fili'];
 
                 //récupérer le support
                 $support = $link->prepare('SELECT * FROM support where id_support = ?');
@@ -56,11 +56,11 @@
     			<tr>
                     <td class="w-25">
                         <a href="./photo.php?id=<?php echo $infosImage['id_image']; ?>.">
-                            <img class="img-fluid img-thumbnail" src="<?php echo $infosImage['lien_image']; ?>" style="height : 100px"/>
+                            <img class="img-fluid img-thumbnail" src="<?php echo $infosImage['lien_image_fili']; ?>" style="height : 100px"/>
                         </a>
                     </td>
                     <td><?php echo $infosImage['nom_image']; ?></td><td class='text-left'><?php echo $infosImage['desc_image']; ?></td>
-                    <td><?php echo $infosSupport['type_support']; ?></td><td><?php echo $prixCommandeTTC; ?></td>
+                    <td><?php echo $infosSupport['type_support']; ?></td><td><?php echo round($prixCommandeTTC, 2); ?></td>
                     <td>
                         <form class="form-group" method="POST" action="./modifPanier.php?idS=<?php echo $infosSupport['id_support']; ?>&idI=<?php echo $infosImage['id_image']; ?>">
                             <input class="form-control" name="qte" value="<?php echo $infosAchat['quantite']; ?>"/>
