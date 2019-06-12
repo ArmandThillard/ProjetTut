@@ -88,7 +88,6 @@
                 $requete = $requete." image.image_visible = 1";
                 // De la plus récente à la plus ancienne
                 $requete = $requete." ORDER BY image.date_upload_image DESC";
-                echo $requete;
                 $res = $link->query($requete);
                 $nbImages = 0;
                 echo '<div class="row">';
