@@ -67,7 +67,6 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">
-							<p>Votre compte a été créé avec succès.</p>
 							<p>Que voulez-vous faire?</p>
 						</div>
 						<div class="modal-footer">
@@ -86,41 +85,41 @@
 <body>
 	<div class="container text-center">
 		<h1 class="mt-lg-5">Inscrivez-vous</h1></br>
-		<form class="was-validated" method=post action="./ajoutClient.php">
+		<form  method=post action="./ajoutClient.php">
 			<div class="form-group row mt-sm-5">
 				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Nom</label>
 				<div class="col-sm-4 ">
-					<input name='nom' type=text class="form-control is-invalid" value="<?php echo $nom; ?>" required/>
+					<input name='nom' type=text class="form-control " value="<?php echo $nom; ?>"/>
 				</div>
 			</div>
 			<div class="form-group row mt-sm-4">
 				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Prénom</label>
 				<div class="col-sm-4">
-					<input class="form-control is-invalid" name='prenom' type=text value="<?php echo $prenom; ?>" required/>
+					<input class="form-control" name='prenom' type=text value="<?php echo $prenom; ?>"/>
 				</div>
 			</div>
             <div class="form-group row mt-sm-4">
 				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Adresse email</label>
 				<div class="col-sm-4">
-					<input class="form-control is-invalid" name='mail' type=text value="<?php echo $mail; ?>" required/>
+					<input class="form-control" name='mail' type=text value="<?php echo $mail; ?>"/>
 				</div>
 			</div>
             <div class="form-group row mt-sm-4">
 				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Mot de passe</label>
 				<div class="col-sm-4">
-					<input class="form-control is-invalid" name='password' type=password required/>
+					<input class="form-control" name='password' type=password />
 				</div>
 			</div>
             <div class="form-group row mt-sm-4">
 				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Confirmation</label>
 				<div class="col-sm-4 ">
-					<input class="form-control is-invalid" name='password2' type=password required/>
+					<input class="form-control" name='password2' type=password />
 				</div>
 			</div>
             <div class="form-group row mt-sm-4 mb-sm-4">
 				<label class="col-sm-2 col-form-label offset-sm-2 font-weight-bold text-left">Téléphone</label>
 				<div class="col-sm-4">
-					<input class="form-control is-invalid" name='telClient' type=text value="<?php echo $tel; ?>" required/>
+					<input class="form-control" name='telClient' type=text value="<?php echo $tel; ?>"/>
 				</div>
 			</div>
             <button type=reset class="btn btn-light mr-sm-5" name="reset">Annuler</button>

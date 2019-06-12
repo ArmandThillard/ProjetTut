@@ -71,17 +71,17 @@
 <body>
 	<div class="container text-center">
 		<h1>Nouvelle photo</h1></br>
-		<form  method=post action="./ajoutPhoto.php" enctype="multipart/form-data">
+		<form class="was-validated" method=post action="./ajoutPhoto.php" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-4 col-form-label col-sm-offset-2">Nom *</label>
 				<div class="col-sm-4 col-sm-offset-1">
-					<input name='nom_image' type=text class="form-control " />
+					<input name='nom_image' type=text class="form-control is-invalid" required/>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-4 col-form-label col-sm-offset-2">Description de l'image *</label>
 				<div class="col-sm-4 col-sm-offset-1">
-					<textarea class="form-control" name='desc_image' type=text></textarea>
+					<textarea class="form-control is-invalid" name='desc_image' type=text required></textarea>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -99,7 +99,7 @@
 			<div class="form-group row">
 				<label class="col-sm-4 col-form-label col-sm-offset-2">Prix H.T *</label>
 				<div class="col-sm-4 col-sm-offset-1">
-					<input class="form-control" name='prix_ht_image' type=text />
+					<input class="form-control is-invalid" name='prix_ht_image' type=text required/>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -126,7 +126,7 @@
 					echo "<div class='form-group row'>
 							<label class='col-sm-4 col-form-label col-sm-offset-2'>Catégories *</label>
 							<div class='col-sm-4'>
-								<select name='nomCategorie' class='form-control'/>
+								<select name='nomCategorie' class='form-control is-invalid' required/>
 								<option>";
 								while($data = $res->fetch()){
 									echo "<option>".$data['nom_categorie'];
@@ -180,8 +180,8 @@
 			<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 			<div class="form-group row">
 				<label class="col-sm-4 col-form-label col-sm-offset-2">Image</label>
-				<div class=" col-sm-4 col-sm-offset-1">
-						<input type="file" name="img" class="custom-file-input">
+				<div class="custom-file col-sm-4 col-sm-offset-1">
+						<input type="file" name="img" class="custom-file-input" required>
     					<label class="custom-file-label text-left">Choose file...</label>
 
 				</div>
