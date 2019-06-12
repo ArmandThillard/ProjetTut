@@ -88,6 +88,11 @@
                 $requete = $requete." image.image_visible = 1";
                 // De la plus récente à la plus ancienne
                 $requete = $requete." ORDER BY image.date_upload_image DESC";
+
+                // Contournement des plus sales de la limite memoire
+                $link->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, FALSE);
+
+                // Hop requete
                 $res = $link->query($requete);
                 $nbImages = 0;
                 echo '<div class="row">';
