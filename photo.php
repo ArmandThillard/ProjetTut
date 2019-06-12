@@ -10,8 +10,6 @@
 ?>
 <body>
 
-	<link rel="stylesheet" type="text/css" href="./style/tmp.css?id=v2">
-
 	<?php if (isset($_GET['page'])) {?>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script type="text/javascript">
@@ -58,10 +56,10 @@
     ?>
 
     <div class="row">
-        <div class="col-6" style="outline : dashed red; height : 50vh;">
+        <div class="col-6" style="height : 50vh;">
 			<img class='img-fluid gallery-image' src=<?php echo $donneesImages[9]; ?> style=' height : 100%;'>
         </div>
-        <div class="col-6" style="outline : dashed red;">
+        <div class="col-6">
             <div class="container text-left">
         		<form class="mt-5"  method=post action="./ajoutPanier.php?id=<?php echo $donneesImages['id_image']; ?>">
         			<div class="form-group text-left row">

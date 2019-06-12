@@ -181,7 +181,7 @@
 			<div class="form-group row">
 				<label class="col-sm-4 col-form-label col-sm-offset-2">Image</label>
 				<div class=" col-sm-4 col-sm-offset-1">
-						<input type="file" class="custom-file-input">
+						<input type="file" name="img" class="custom-file-input">
     					<label class="custom-file-label text-left">Choose file...</label>
 
 				</div>
