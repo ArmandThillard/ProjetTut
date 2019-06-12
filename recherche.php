@@ -34,7 +34,7 @@
             <h1 class="font-weight-bold text-light"><small> Résultats de la recherche pour : <?=$_GET['search']?> </small></h1>
             <?php
                 $filters=false;
-                $requete = 'SELECT DISTINCT image.id_image id, image.lien_image_fili lien FROM image, tag, referencer, correspondre, categorie WHERE ';
+                $requete = 'SELECT DISTINCT image.id_image id, image.lien_image_fili lien, image.prix_ht_image prixHT, image.nom_image nomImg FROM image, tag, referencer, correspondre, categorie WHERE ';
                 //recherche des mots-clés dans : TAGS, NOM_IMAGE
 
                 if(isset($_GET['search']) && !empty($_GET['search'])){
@@ -103,7 +103,9 @@
                     ?>
                         <div class="col-4">
                             <?php
+                            $prixImg = round($data['prixHT']*1.2, 2);
                             echo '<a href="./photo.php?id='.$data['id'].'"><img class="img-fluid gallery-image" src="'.$data['lien'].'"></a>';
+                            echo "<a href='./photo.php?id=".$data['id']."' class='text-center' style='color:white;'><p>".$data['nomImg']." - ".$prixImg."€</p></a>";
                             $nbImages++;
                             ?>
                         </div>
