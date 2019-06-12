@@ -53,15 +53,24 @@
                 }
                 // Insertion du prix si renseigné
                 if(isset($_GET['prix-min']) && !empty($_GET['prix-min'])){
+                    if($filters){
+                        $requete = $requete." AND ";
+                    }
                     $filters = true;
-                    $requete = $requete." AND image.prix_ht_image >= ".$_GET['prix-min'];
+                    $requete = $requete." image.prix_ht_image >= ".$_GET['prix-min'];
                 }
-                if(isset($_GET['prix-max']) && !empty($_GET['prix-min'])){
+                if(isset($_GET['prix-max']) && !empty($_GET['prix-max'])){
+                    if($filters){
+                        $requete = $requete." AND ";
+                    }
                     $filters = true;
-                    $requete = $requete." AND image.prix_ht_image <= ".$_GET['prix-max'];
+                    $requete = $requete." image.prix_ht_image <= ".$_GET['prix-max'];
                 }
                 // Insertion des catégories si cochées
                 if(isset($_GET['cat'])){
+                    if($filters){
+                        $requete = $requete." AND ";
+                    }
                     $filters = true;
                     $requete = $requete." image.id_image = correspondre.id_image AND correspondre.id_categorie = categorie.id_categorie";
                     $res = $link->query("SELECT nom_categorie FROM categorie");
@@ -79,6 +88,7 @@
                 $requete = $requete." image.image_visible = 1";
                 // De la plus récente à la plus ancienne
                 $requete = $requete." ORDER BY image.date_upload_image DESC";
+                echo $requete;
                 $res = $link->query($requete);
                 $nbImages = 0;
                 echo '<div class="row">';
