@@ -98,7 +98,6 @@
                     ?>
                         <div class="col-4">
                             <?php
-                            echo 'lien : '.$data['lien'].'</br>';
                             echo '<a href="./photo.php?id='.$data['id'].'"><img class="img-fluid gallery-image" src="'.$data['lien'].'"></a>';
                             $nbImages++;
                             ?>
