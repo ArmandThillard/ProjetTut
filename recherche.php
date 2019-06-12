@@ -3,7 +3,7 @@
     require("./search.php");
     require_once('./inc/connection/connect_info.php');
     try {
-           $link = new PDO("mysql:host=$server;dbname=$db",$login, $mdp);
+           $link = new PDO("mysql:host=$server;dbname=$db;charset=utf8",$login, $mdp);
     } catch(Exception $e) {
            die('Erreur : '.$e->getMessage());
     }
@@ -98,6 +98,7 @@
                     ?>
                         <div class="col-4">
                             <?php
+                            echo 'lien : '.$data['lien'].'</br>';
                             echo '<a href="./photo.php?id='.$data['id'].'"><img class="img-fluid gallery-image" src="'.$data['lien'].'"></a>';
                             $nbImages++;
                             ?>
