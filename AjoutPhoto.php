@@ -121,21 +121,25 @@
 			//vérifier si tag existe
 			if ($motsCles[0] != '') {
 				foreach ($motsCles as $value) {
+
+					//lower
+					$nomTag = mb_strtolower($value, 'UTF-8');
+
 					$tag = $link->prepare('SELECT * FROM tag WHERE nom_tag = ?');
 
-					$tag->execute(array($value));
+					$tag->execute(array($nomTag));
 
 					//si tag n'existe pas, l'ajouter
 					if ($tag->fetch() == NULL) {
 						$insert = $link->prepare('INSERT INTO tag(nom_tag)
 																VALUES (?)');
-						$insert->execute(array($value));
+						$insert->execute(array($nomTag));
 					}
 
 					//récupération id tag
 					$tag = $link->prepare('SELECT * FROM tag WHERE nom_tag = ?');
 
-					$tag->execute(array($value));
+					$tag->execute(array($nomTag));
 					$infoTag = $tag->fetch();
 
 					echo "id tag : ".$infoTag[0]."</br>";
@@ -154,10 +158,14 @@
 			/***************************** Traitement nouvelle collection ********************************/
 			if ($_POST['nvCol'] != '') {
 				echo 'isset marche</br>';
+
+				//lower
+				$nomCollection = mb_strtolower($_POST['nvCol'], 'UTF-8');
+
 				//vérifier si la collection existe
 				$col = $link->prepare('SELECT * FROM collection WHERE nom_collection = ? and mail_photographe = ?');
 
-				$col->execute(array($_POST['nvCol'], $_SESSION['login']));
+				$col->execute(array($nomCollection, $_SESSION['login']));
 
 				//Ajouter la collection si non existante
 				if ($col->fetch() == NULL) {
@@ -168,13 +176,13 @@
 
 					$insert = $link->prepare('INSERT INTO collection(nom_collection, date_creation, collection_visible, code_acces_collection, mail_photographe)
 															VALUES (?, ?, ?, ?, ?)');
-					$insert->execute(array($_POST['nvCol'], $dateImport, $collectionVisible, $codeAccesCollection, $_SESSION['login']));
+					$insert->execute(array($nomCollection, $dateImport, $collectionVisible, $codeAccesCollection, $_SESSION['login']));
 
 					//créer le dossier de la collection dans le dossier photographe/originale
-					$nomCheminNvColOriginale = "./img/".$_SESSION['login']."/originale/".$_POST['nvCol'];
+					$nomCheminNvColOriginale = "./img/".$_SESSION['login']."/originale/".$nomCollection;
 					mkdir($nomCheminNvColOriginale, 0777, true);
 					//créer le dossier de la collection dans le dossier photographe/filigrane
-					$nomCheminNvColFiligrane = "./img/".$_SESSION['login']."/filigrane/".$_POST['nvCol'];
+					$nomCheminNvColFiligrane = "./img/".$_SESSION['login']."/filigrane/".$nomCollection;
 					mkdir($nomCheminNvColFiligrane, 0777, true);
 
 				}
@@ -182,7 +190,7 @@
 				//récupérer l'id de la collection
 				$col = $link->prepare('SELECT * FROM collection WHERE nom_collection = ? and mail_photographe = ?');
 
-				$col->execute(array($_POST['nvCol'], $_SESSION['login']));
+				$col->execute(array($nomCollection, $_SESSION['login']));
 				$infoCol = $col->fetch();
 
 				echo "id col : ".$infoCol[0]."</br>";
@@ -192,8 +200,6 @@
 				$updateImg = $link->prepare('UPDATE image SET id_collection = ? WHERE id_image = ?');
 
 				$updateImg->execute(array($infoCol[0], $dataImg[0]));
-
-				$nomCollection = $_POST['nvCol'];
 
 			}
 			/***************************** Fin Traitement nouvelle collection ********************************/
@@ -213,12 +219,14 @@
 			*/
 
 			//Contrôles image
-			//if ($_FILES['img']['error'] > 0) $erreur = "Erreur lors du transfert";
-			//if ($_FILES['img']['size'] > $maxsize) $erreur = "Le fichier est trop gros";
+			if ($_FILES['img']['error'] > 0) $erreur = "Erreur lors du transfert";
+			//echo $erreur.'</br>';
+			if ($_FILES['img']['size'] > $maxsize) $erreur = "Le fichier est trop gros";
+			//echo $erreur.'</br>';
 
 			//if ( in_array($extension_upload,$extensions_valides) ) echo "Extension correcte";
 
-			if ($_FILES['img']['error'] <= 0 and $_FILES['img']['size'] <= $maxsize and in_array($extension_upload,$extensions_valides)) {
+			if ($_FILES['img']['error'] <= 0 and in_array($extension_upload,$extensions_valides)) {
 				if ($idCollection == NULL) {
 					echo 'id collection null à l upload</br>';
 					$nomImg = $dataImg[0];
@@ -242,13 +250,11 @@
 				$cheminImgFiligrane = "./img/".$_SESSION['login']."/filigrane/".$nomCollection."/".$nomImg.".".$extension_upload;
 			}
 			// Chargement de l'image dans une variable
+		    $fili = ImageCreateFromPNG('./img/watermark.png');
 		    $img = ImageCreateFromJPEG($cheminImgOriginale);
 
-		    // Couleur du texte au format RGB
-		    $textcolor = imagecolorallocate($img, 224, 34, 34);
-
-		    // Le texte en question
-		    imagestring($img, 5, 10, 10, 'Horizon', $textcolor);
+		    //Copier le filigrane sur la photo
+		    imagecopy($img, $fili, 0, 0, 0, 0, imagesx($fili), imagesy($fili));
 
 		    // Maintenant, envoyer les données de l'image
 		    imagejpeg ($img, $cheminImgFiligrane, 100);

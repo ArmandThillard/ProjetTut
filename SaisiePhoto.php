@@ -54,7 +54,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">
-							<p>L'image que vous avez vouluu ajouter existe déjà</p>
+							<p>L'image que vous avez voulu ajouter existe déjà</p>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn" onclick="window.location.href='./saisiePhoto.php'">Ajouter une photo</button>
