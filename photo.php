@@ -57,7 +57,7 @@
 
     <div class="row">
         <div class="col-6" style="height : 50vh;">
-			<img class='img-fluid ' src=<?php echo $donneesImages[10]; ?> style=' height : 100%;'>
+			<img class='img-fluid img-detail' src=<?php echo $donneesImages[10]; ?> style=' height : 100%;'>
         </div>
         <div class="col-6">
             <div class="container text-left">
