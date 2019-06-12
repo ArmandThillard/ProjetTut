@@ -44,10 +44,13 @@
                         }
                     }?>
                     <div class="col">
-                        <img class="img-fluid" src="<?=$data['lien'];?>" alt="catégorie <?=$data['cat'];?>">
+                        <a href="./recherche.php?cat=<?=$data['cat']?>">
+                            <img class="img-fluid" src="<?=$data['lien'];?>" alt="catégorie <?=$data['cat'];?>">
+
                         <div class="carousel-caption">
                             <h3><span><?=ucfirst($data['cat']);?></span></h3>
                         </div>
+                        </a>
                     </div>
             <?php
                     $nbImages++;

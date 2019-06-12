@@ -2,5 +2,10 @@
     text-align:center;
 }
 #carousel-container{
-    max-height : 220px;
+    max-height : 150px;
+}
+.img-fluid{
+    object-fit: cover !important;
+    width : 100% !important;
+    height: 25vh !important;
 }

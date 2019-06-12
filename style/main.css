@@ -36,7 +36,9 @@ body {
 .gallery-image{
     margin-top: 8px;
     margin-bottom : 8px;
-    object-fit:scale-down;
+    object-fit: cover;
+    width : 100% !important;
+    height: 30vh !important;
 }
 
 .filters{
