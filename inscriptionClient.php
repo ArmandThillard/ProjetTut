@@ -23,7 +23,7 @@
 			$("#myModal").modal('show');
 		});
 	</script>
-	<div id="myModal" class="modal fade">
+	<div id="myModal" class="modal fade" style="color:black;">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -59,7 +59,7 @@
 					$("#myModal").modal('show');
 				});
 			</script>
-			<div id="myModal" class="modal fade">
+			<div id="myModal" class="modal fade" style="color:black;">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">

@@ -2,7 +2,9 @@
     margin-top:200px;
 }
 body {
-    background-color: white;
+    background-color: #343a40;
+    color: white;
+
 }
 .searchDiv{
     position:relative;
@@ -38,7 +40,7 @@ body {
 }
 
 .filters{
-    background-color: white;
+    /*background-color: white;*/
     margin-bottom : 8px;
     margin-top : 8px;
 }

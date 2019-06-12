@@ -7,7 +7,6 @@
 <?php
     require('./header.php');
 ?>
-	<link rel="stylesheet" type="text/css" href="./style/tmp.css?id=v2">
 <body>
     <?php
     	include('./inc/connection/connect_info.php');

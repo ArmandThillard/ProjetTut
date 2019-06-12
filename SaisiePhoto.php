@@ -17,7 +17,7 @@
 					$("#myModal").modal('show');
 				});
 			</script>
-			<div id="myModal" class="modal fade">
+			<div id="myModal" class="modal fade" style="color:black;">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -46,7 +46,7 @@
 					$("#myModal").modal('show');
 				});
 			</script>
-			<div id="myModal" class="modal fade">
+			<div id="myModal" class="modal fade" style="color:black;">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -68,7 +68,7 @@
 		}
 	}
 ?>
-<body style="background-color: white;">
+<body>
 	<div class="container text-center">
 		<h1>Nouvelle photo</h1></br>
 		<form  method=post action="./ajoutPhoto.php" enctype="multipart/form-data">
