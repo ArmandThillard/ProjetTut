@@ -3,6 +3,12 @@
     <?php
         require("./header.php");
         require("./search.php");
+        require_once('./inc/connection/connect_info.php');
+        try {
+               $link = new PDO("mysql:host=$server;dbname=$db;charset=utf8",$login, $mdp);
+        } catch(Exception $e) {
+               die('Erreur : '.$e->getMessage());
+        }
     ?>
 </div>
 <body>
@@ -17,6 +23,39 @@
             <li data-target="#carousel-categories" data-slide-to="2"></li>
         </ul>
         <div class="carousel-inner">
+            <?php
+                $res = $link->query('SELECT image.lien_image_fili lien, categorie.nom_categorie cat
+                                FROM image, correspondre, categorie
+                                WHERE image.id_image = correspondre.id_image AND
+                                        correspondre.id_categorie = categorie.id_categorie
+                                GROUP BY categorie.id_categorie
+                                ORDER BY image.date_upload_image DESC');
+                $nbImages = 0;
+                while($data = $res->fetch()){
+                    if($nbImages == 0){?>
+                        <div class="carousel-item active">
+                        <div class="row"><?php
+                    }else{
+                        if($nbImages % 3 == 0){?>
+                            </div>
+                            </div>
+                            <div class="carousel-item">
+                            <div class="row"><?php
+                        }
+                    }?>
+                    <div class="col">
+                        <img class="img-fluid" src="<?=$data['lien'];?>" alt="catégorie <?=$data['cat'];?>">
+                        <div class="carousel-caption">
+                            <h3><span><?=ucfirst($data['cat']);?></span></h3>
+                        </div>
+                    </div>
+            <?php
+                    $nbImages++;
+                }
+            ?>
+        </div></div>
+        </div>
+            <!--
             <div class="carousel-item active">
                 <div class="row">
                     <div class="col">
@@ -62,6 +101,7 @@
                 </div>
             </div>
         </div>
+        -->
         <a class="carousel-control-prev" href="#carousel-categories" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
