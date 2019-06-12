@@ -39,7 +39,7 @@
 
                 if(isset($_GET['search']) && !empty($_GET['search'])){
                     $filters = true;
-                    $_GET['search'] = strtolower($_GET['search']);
+                    $_GET['search'] = mb_strtolower($_GET['search'], 'UTF-8');
                     $search = explode(' ',$_GET['search']);
                     $requete = $requete." image.id_image = referencer.id_image AND tag.id_tag = referencer.id_tag AND (";
                     for($i = 0; $i < count($search); $i++){
